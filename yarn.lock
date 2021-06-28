@@ -7944,7 +7944,6 @@ __metadata:
     react-dom: ^17.0.2
     react-scripts: 4.0.3
     sb: ^6.3.0
-    test-linking-package: ../cstv/test-linking-package
     typescript: ^4.3.4
     web-vitals: ^2.0.1
     webpack-hot-middleware: ^2.25.0
@@ -19698,14 +19697,6 @@ resolve@^2.0.0-next.3:
   checksum: 68294d10066726cbced152aeb8a39cf9fd199199c62afb39290b824f613090f2535fc6acbad7d78f1f34cf00f4f00d42fa14f02d6262b910a7c9e2db2ecfa388
   languageName: node
   linkType: hard
-
-"test-linking-package@portal:/home/vin/dev/cstv/test-linking-package::locator=cstv-controls%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "test-linking-package@portal:/home/vin/dev/cstv/test-linking-package::locator=cstv-controls%40workspace%3A."
-  dependencies:
-    typescript: ^4.3.4
-  languageName: node
-  linkType: soft
 
 "text-table@npm:0.2.0, text-table@npm:^0.2.0":
   version: 0.2.0

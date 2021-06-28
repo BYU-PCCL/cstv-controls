@@ -10,7 +10,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "test-linking-package": "../cstv/test-linking-package",
     "web-vitals": "^2.0.1"
   },
   "scripts": {
@@ -92,8 +91,5 @@
     "open@7.4.2": {
       "unplugged": true
     }
-  },
-  "resolutions": {
-    "test-linking-package": "portal:/home/vin/dev/cstv/test-linking-package"
   }
 }

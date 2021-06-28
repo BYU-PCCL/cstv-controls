@@ -85,7 +85,7 @@
   },
   "//": "See https://prettier.io/docs/en/precommit.html for more background",
   "lint-staged": {
-    "*.{html,htm,js,jsx,ts,tsx,css,md}": "yarn prettier --write .",
+    "*.{html,htm,js,jsx,ts,tsx,css,md}": "yarn prettier --max-warnings=0 --write .",
     "*.{js,jsx,ts,tsx,d.ts}": "yarn eslint --fix"
   },
   "dependenciesMeta": {

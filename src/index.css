@@ -1,0 +1,40 @@
+/* See https://youtrack.jetbrains.com/issue/WEB-18057 */
+/*noinspection CssUnknownTarget*/
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+/*noinspection CssUnknownTarget*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+/*
+Possibly related:
+- https://youtrack.jetbrains.com/issue/WEB-43358
+- https://youtrack.jetbrains.com/issue/WEB-26130
+*/
+/*noinspection CssInvalidAtRule*/
+@import-normalize;
+
+body {
+  margin: 0;
+
+  /*
+    We use Lato, and then the default font order from Create React App.
+  
+    @vinhowe: Judging by
+    https://github.com/facebook/create-react-app/pull/3235#issuecomment-341149399,
+    it looks like CRA just used the fonts from reactjs.org's reset.css file.
+    I couldn't find any history for that file before
+    https://github.com/reactjs/reactjs.org/blob/9d9b2021ed371af1c78d33ad9f342466b25157fc/src/css/reset.css.
+  
+    Possibly based on https://bitsofco.de/the-new-system-font-stack/
+    */
+  font-family: "Lato", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  /*
+    @vinhowe: Not using `-webkit-font-smoothing: antialiased` from the
+    Create React App default boilerplate here because I'm not convinced
+    that it's a good idea. My sources:
+    - https://github.com/google/fonts/issues/1170: Google Fonts removed it
+    - https://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/ I found
+      this article super convincing
+    */
+}

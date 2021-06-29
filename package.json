@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --write .",
     "postinstall": "husky install",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "start-storybook -p 6006 -s public,./,./src",
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {

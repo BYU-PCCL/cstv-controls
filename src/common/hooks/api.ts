@@ -1,24 +1,46 @@
 import {
+  QueryFunction,
+  QueryKey,
   useMutation,
   UseMutationResult,
   useQuery,
   useQueryClient,
+  UseQueryOptions,
   UseQueryResult,
 } from "react-query";
 import { getCollections, getCurrentExperience, getExperiences } from "../api";
 import { Experience } from "../../types/experience";
 import { ApiError, setAuthCode } from "../apiUtils";
 
+const RETRY_COUNT = 3;
+
+const useQueryRetryUnless400 = <
+  TQueryFnData = unknown,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey
+>(
+  queryKey: TQueryKey,
+  queryFn: QueryFunction<TQueryFnData, TQueryKey>,
+  options?: UseQueryOptions<TQueryFnData, ApiError, TData, TQueryKey>
+) =>
+  useQuery(queryKey, queryFn, {
+    retry: (failureCount, error) =>
+      error.response.status >= 400 &&
+      error.response.status < 500 &&
+      failureCount < RETRY_COUNT,
+    ...options,
+  });
+
 export const useExperiences = (): UseQueryResult<Experience[], ApiError> =>
-  useQuery(["experiences"], getExperiences);
+  useQueryRetryUnless400(["experiences"], getExperiences);
 
 export const useCollections = (): UseQueryResult<Experience[], ApiError> =>
-  useQuery(["collections"], getCollections);
+  useQueryRetryUnless400(["collections"], getCollections);
 
 export const useCurrentExperience = (): UseQueryResult<
   Experience[],
   ApiError
-> => useQuery(["current"], getCurrentExperience);
+> => useQueryRetryUnless400(["current"], getCurrentExperience);
 
 export const useAuthCodeMutation = (): UseMutationResult<
   void,

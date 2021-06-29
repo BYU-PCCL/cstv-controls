@@ -1,15 +1,23 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import AuthCodeRoute from "./AuthCodeRoute";
 
-const containerStyle = css`
-  background: lightblue;
-  height: 500px;
-  width: 500px;
-`;
+const queryClient = new QueryClient();
 
 function CstvApp(): JSX.Element {
-  return <div css={containerStyle} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Switch>
+          <Route exact path="/c/:code">
+            <AuthCodeRoute />
+          </Route>
+          <Route path="*">404 nothing here :(</Route>
+        </Switch>
+      </Router>
+    </QueryClientProvider>
+  );
 }
 
 export default CstvApp;

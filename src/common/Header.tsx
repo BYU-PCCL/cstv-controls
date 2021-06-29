@@ -10,6 +10,11 @@ const headerContainerStyle = (collapsed: boolean) => css`
   display: flex;
   align-items: center;
   padding: 0 16px;
+
+  @media (min-width: 500px) {
+    // TODO: Figure out if there's some way to make this cleaner
+    height: ${collapsed ? "72" : "100"}px;
+  }
 `;
 
 const logoImageStyle = css`

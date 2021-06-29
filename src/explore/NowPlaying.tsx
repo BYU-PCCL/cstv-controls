@@ -9,10 +9,12 @@ const containerStyle = css`
   flex-direction: column;
 `;
 
-const headerTextContainerStyle = css`
-  display: flex;
+const headerTextContainerStyle = (visible: boolean) => css`
+  height: ${visible ? "initial" : "0"};
+  position: relative;
+  overflow: hidden;
   flex-direction: column;
-  padding: 12px 16px;
+  padding: ${visible ? "12px 16px" : "0"};
 `;
 
 const superheadingStyle = css`
@@ -100,7 +102,7 @@ const NowPlaying = ({
 
   return (
     <div css={containerStyle}>
-      <div css={headerTextContainerStyle}>
+      <div css={headerTextContainerStyle(!fixed)}>
         <h2 css={superheadingStyle}>NOW</h2>
         <h1 css={titleStyle}>{experience.title}</h1>
       </div>

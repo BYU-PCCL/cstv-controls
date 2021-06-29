@@ -25,8 +25,8 @@ const useQueryRetryUnless400 = <
 ) =>
   useQuery(queryKey, queryFn, {
     retry: (failureCount, error) =>
-      error.response.status >= 400 &&
-      error.response.status < 500 &&
+      error.response.status < 400 &&
+      error.response.status >= 500 &&
       failureCount < RETRY_COUNT,
     ...options,
   });

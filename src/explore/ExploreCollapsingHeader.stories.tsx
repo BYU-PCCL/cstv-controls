@@ -3,6 +3,7 @@ import React from "react";
 
 import ExploreCollapsingHeaderComponent from "./ExploreCollapsingHeader";
 import { Experience } from "../types/experience";
+import PageWidth from "../common/PageWidth";
 
 const testExperience: Experience = {
   id: "test",
@@ -18,7 +19,9 @@ export default {
 export const ExploreCollapsingHeader: ComponentStory<
   typeof ExploreCollapsingHeaderComponent
 > = (args) => (
-  <ExploreCollapsingHeaderComponent {...args} experience={testExperience} />
+  <PageWidth>
+    <ExploreCollapsingHeaderComponent {...args} experience={testExperience} />
+  </PageWidth>
 );
 
 // Have to do this to consolidate component and story into one

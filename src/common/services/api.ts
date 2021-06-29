@@ -1,7 +1,7 @@
 import { get, put } from "./apiUtils";
-import { CurrentExperience, Experience } from "../types/experience";
-import { Collection } from "../types/collection";
-import { ApiStatusResponse } from "../types/response";
+import { CurrentExperience, Experience } from "../../types/experience";
+import { Collection } from "../../types/collection";
+import { ApiStatusResponse } from "../../types/response";
 
 const EXPERIENCES_ENDPOINT = "experiences";
 const COLLECTIONS_ENDPOINT = "collections";

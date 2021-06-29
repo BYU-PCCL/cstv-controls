@@ -9,7 +9,7 @@ import {
   UseQueryResult,
 } from "react-query";
 import { getCollections, getCurrentExperience, getExperiences } from "../api";
-import { Experience } from "../../types/experience";
+import { Experience } from "../../../types/experience";
 import { ApiError, setAuthCode } from "../apiUtils";
 
 const RETRY_COUNT = 3;

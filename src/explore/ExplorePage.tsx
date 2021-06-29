@@ -1,5 +1,5 @@
 import React from "react";
-import { useExperiences } from "../common/hooks/api";
+import { useExperiences } from "../common/services/hooks/api";
 
 const ExplorePage = (): JSX.Element => {
   const { status, data, error } = useExperiences();

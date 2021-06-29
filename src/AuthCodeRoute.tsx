@@ -1,6 +1,6 @@
 import { Redirect, useParams } from "react-router-dom";
 import React, { useEffect } from "react";
-import { useAuthCodeMutation } from "./common/hooks/api";
+import { useAuthCodeMutation } from "./common/services/hooks/api";
 
 const AuthCodeRoute = (): JSX.Element => {
   const { code } = useParams<{ code: string }>();

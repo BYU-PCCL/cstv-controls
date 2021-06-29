@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 const pageWrapperStyle = css`
   display: flex;

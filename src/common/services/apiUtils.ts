@@ -1,7 +1,7 @@
 const BASE_URL: string =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:8001/api/";
 
-// @vinhowe As noted in the code fo rthe public API, it's not really necessary
+// @vinhowe As noted in the code for the public API, it's not really necessary
 // for us to define a user but the username:password format is defined in the
 // basic auth protocol.
 // I suppose we could just handle it with query parameters or something but this

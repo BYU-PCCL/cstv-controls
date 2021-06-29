@@ -6,7 +6,7 @@ import AuthCodeRoute from "./AuthCodeRoute";
 
 const queryClient = new QueryClient();
 
-function CstvApp(): JSX.Element {
+function CstvControlsApp(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
@@ -24,4 +24,4 @@ function CstvApp(): JSX.Element {
   );
 }
 
-export default CstvApp;
+export default CstvControlsApp;

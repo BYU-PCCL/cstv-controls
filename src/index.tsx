@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import CstvApp from "./CstvApp";
+import CstvControlsApp from "./CstvControlsApp";
 // import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CstvApp />
+    <CstvControlsApp />
   </React.StrictMode>,
   document.getElementById("root")
 );

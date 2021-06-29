@@ -7,7 +7,7 @@ export interface ExperienceColors {
 export interface Experience {
   id: string;
   title: string;
-  lastUpdate: string;
+  lastUpdate: number;
   description?: string;
   artist?: string;
   collection?: string;

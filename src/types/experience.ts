@@ -13,6 +13,7 @@ export interface Experience {
   collection?: string;
   lifetime?: number;
   colors?: ExperienceColors;
+  thumbnail?: string;
 }
 
 export interface CurrentExperience extends Experience {

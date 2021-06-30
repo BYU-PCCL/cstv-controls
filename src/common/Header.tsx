@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "./assets/logo.svg";
 
 const headerContainerStyle = (collapsed: boolean) => css`
@@ -28,7 +29,9 @@ const Header = ({
 }): JSX.Element => {
   return (
     <div css={headerContainerStyle(collapsed)}>
-      <img src={logo} alt="" css={logoImageStyle} />
+      <Link to="/">
+        <img src={logo} alt="" css={logoImageStyle} />
+      </Link>
     </div>
   );
 };

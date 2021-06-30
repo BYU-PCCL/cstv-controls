@@ -4,6 +4,7 @@ import React from "react";
 import ExploreCollapsingHeaderComponent from "./ExploreCollapsingHeader";
 import { Experience } from "../types/experience";
 import PageWidth from "../common/PageWidth";
+import { MemoryRouter } from "react-router-dom";
 
 const testExperience: Experience = {
   id: "test",
@@ -19,9 +20,11 @@ export default {
 export const ExploreCollapsingHeader: ComponentStory<
   typeof ExploreCollapsingHeaderComponent
 > = (args) => (
-  <PageWidth>
-    <ExploreCollapsingHeaderComponent {...args} experience={testExperience} />
-  </PageWidth>
+  <MemoryRouter initialEntries={["/"]}>
+    <PageWidth>
+      <ExploreCollapsingHeaderComponent {...args} experience={testExperience} />
+    </PageWidth>
+  </MemoryRouter>
 );
 
 // Have to do this to consolidate component and story into one

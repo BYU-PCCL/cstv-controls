@@ -10,7 +10,9 @@ import {
 } from "react-query";
 import { getCollections, getCurrentExperience, getExperiences } from "../api";
 import { Experience } from "../../../types/experience";
+import { Collection } from "../../../types/collection";
 import { ApiError, setAuthCode } from "../apiUtils";
+import { ApiStatusResponse } from "../../../types/response";
 
 const RETRY_COUNT = 3;
 
@@ -32,16 +34,18 @@ const useQueryRetryUnless400 = <
     ...options,
   });
 
-export const useExperiences = (): UseQueryResult<Experience[], ApiError> =>
-  useQueryRetryUnless400(["experiences"], getExperiences);
-
-export const useCollections = (): UseQueryResult<Experience[], ApiError> =>
-  useQueryRetryUnless400(["collections"], getCollections);
-
-export const useCurrentExperience = (): UseQueryResult<
-  Experience[],
+export const useExperiences = (): UseQueryResult<
+  Record<string, Experience>,
   ApiError
-> => useQueryRetryUnless400(["current"], getCurrentExperience);
+> => useQueryRetryUnless400(["experiences"], getExperiences);
+
+export const useCollections = (): UseQueryResult<
+  Record<string, Collection>,
+  ApiError
+> => useQueryRetryUnless400(["collections"], getCollections);
+
+export const useCurrentExperience = (): UseQueryResult<Experience, ApiError> =>
+  useQueryRetryUnless400(["current"], getCurrentExperience);
 
 // TODO: Add mutation for current experience
 

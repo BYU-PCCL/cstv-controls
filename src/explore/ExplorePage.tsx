@@ -1,20 +1,46 @@
-import React from "react";
-import { useExperiences } from "../common/services/hooks/api";
+import React, { useEffect, useState } from "react";
+import { Experience } from "../types/experience";
+import { Button } from "@material-ui/core";
+import { useCurrentExperienceMutation } from "../common/services/hooks/api";
+import {
+  useCurrentExperience,
+  useExperiences,
+} from "../common/services/hooks/api";
+import PageWidth from "../common/PageWidth";
+import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
 
 const ExplorePage = (): JSX.Element => {
-  const { status, data, error } = useExperiences();
+  const currentExperienceMutation = useCurrentExperienceMutation();
+  const { data: experiencesMap } = useExperiences();
+  const { data: currentExperience } = useCurrentExperience();
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+
+  useEffect(() => {
+    if (!experiencesMap) {
+      return;
+    }
+    setExperiences(Object.values(experiencesMap));
+  }, [experiencesMap]);
 
   return (
-    <div>
-      {status === "loading" ? (
-        "Loading..."
-      ) : status === "error" && error ? (
-        <span>{error.response.status}</span>
-      ) : (
-        data && <span>{JSON.stringify(data)}</span>
+    <PageWidth>
+      {currentExperience && (
+        <ExploreCollapsingHeader experience={currentExperience} />
       )}
-    </div>
+      {experiences.length > 0 &&
+        experiences.map((experience) => (
+          <div key={experience.id}>
+            <h1>{experience.title}</h1>
+            <Button
+              variant="outlined"
+              disableRipple
+              onClick={() => currentExperienceMutation.mutate(experience.id)}
+            >
+              Start it up
+            </Button>
+          </div>
+        ))}
+    </PageWidth>
   );
 };
-
 export default ExplorePage;

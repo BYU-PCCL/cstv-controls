@@ -21,7 +21,11 @@ const logoImageStyle = css`
   height: 45px;
 `;
 
-const Header = ({ collapsed }: { collapsed: boolean }): JSX.Element => {
+const Header = ({
+  collapsed = false,
+}: {
+  collapsed?: boolean;
+}): JSX.Element => {
   return (
     <div css={headerContainerStyle(collapsed)}>
       <img src={logo} alt="" css={logoImageStyle} />

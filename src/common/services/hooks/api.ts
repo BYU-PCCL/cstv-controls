@@ -8,7 +8,12 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "react-query";
-import { getCollections, getCurrentExperience, getExperiences } from "../api";
+import {
+  getCollections,
+  getCurrentExperience,
+  getExperiences,
+  setCurrentExperience,
+} from "../api";
 import { Experience } from "../../../types/experience";
 import { Collection } from "../../../types/collection";
 import { ApiError, setAuthCode } from "../apiUtils";
@@ -47,7 +52,18 @@ export const useCollections = (): UseQueryResult<
 export const useCurrentExperience = (): UseQueryResult<Experience, ApiError> =>
   useQueryRetryUnless400(["current"], getCurrentExperience);
 
-// TODO: Add mutation for current experience
+export const useCurrentExperienceMutation = (): UseMutationResult<
+  ApiStatusResponse,
+  unknown,
+  string
+> => {
+  const queryClient = useQueryClient();
+  // TODO: Figure why onSuccess is being marked as unused
+  // noinspection JSUnusedGlobalSymbols
+  return useMutation(setCurrentExperience, {
+    onSuccess: async () => queryClient.invalidateQueries("current"),
+  });
+};
 
 export const useAuthCodeMutation = (): UseMutationResult<
   void,

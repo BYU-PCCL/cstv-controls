@@ -11,7 +11,6 @@ const containerStyle = css`
 
 const titleStyle = css`
   display: flex;
-  width: 150px;
   background-color: lightblue;
   word-break: break-all;
 `;

@@ -12,8 +12,8 @@ export interface Experience {
   artist?: string;
   collection?: string;
   lifetime?: number;
-  colors?: ExperienceColors;
-  thumbnail?: string;
+  colors: ExperienceColors;
+  thumbnail: string;
 }
 
 export interface CurrentExperience extends Experience {

@@ -1,24 +1,13 @@
 const BASE_URL: string =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:8001/api/";
 
-// @vinhowe As noted in the code for the public API, it's not really necessary
-// for us to define a user but the username:password format is defined in the
-// basic auth protocol.
-// I suppose we could just handle it with query parameters or something but this
-// way seems the best. This is all to say that my decision to use HTTP's basic
-// authentication scheme was informed only by convenience and a bias toward
-// existing standards. If you find good reasons to use something else, go ahead.
-const AUTH_USER = "cstv";
-
 const AUTH_CODE_STORAGE_KEY = "cstvAuth";
 
 const getEndpointUrl = (endpoint: string) =>
   new URL(endpoint, BASE_URL).toString();
 
 const getAuthHeaders = () => ({
-  Authorization: `Basic ${btoa(
-    `${AUTH_USER}:${localStorage.getItem(AUTH_CODE_STORAGE_KEY)}`
-  )}`,
+  "X-AUTH-CODE": localStorage.getItem(AUTH_CODE_STORAGE_KEY) || "",
 });
 
 const getContentTypeHeaders = (contentType = "application/json") => ({

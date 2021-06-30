@@ -42,7 +42,7 @@ const requestWithBody = <BodyType, ResponseType>(
   getJsonResponsePromise(
     checkedRequest(
       fetch(getEndpointUrl(endpoint), {
-        method: "POST",
+        method: method,
         headers: getRequestWithBodyHeaders(contentType),
         body: JSON.stringify(body),
       })

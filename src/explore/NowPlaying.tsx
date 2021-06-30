@@ -95,21 +95,23 @@ const NowPlaying = ({
   experience,
 }: {
   fixed: boolean;
-  experience: Experience;
+  experience?: Experience;
 }): JSX.Element => {
   return (
     <div css={containerStyle}>
       <div css={headerTextContainerStyle(!fixed)}>
         <h2 css={superheadingStyle}>NOW</h2>
-        <h1 css={titleStyle}>{experience.title}</h1>
+        <h1 css={titleStyle}>{experience?.title || "Nothing"}</h1>
       </div>
-      <div css={imageContainerStyle}>
-        <img src="https://lorempixel.com/800/500/" alt="" css={imageStyle} />
-        <div css={imageOverlayContainerStyle("#0B1D39", "#ffffff")}>
-          <SettingsRemoteIcon fontSize="large" />
-          <h2 css={controlPromptTextStyle}>Tap to control</h2>
+      {experience != null && (
+        <div css={imageContainerStyle}>
+          <img src="https://lorempixel.com/800/500/" alt="" css={imageStyle} />
+          <div css={imageOverlayContainerStyle("#0B1D39", "#ffffff")}>
+            <SettingsRemoteIcon fontSize="large" />
+            <h2 css={controlPromptTextStyle}>Tap to control</h2>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

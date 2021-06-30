@@ -9,7 +9,11 @@ const pageWrapperStyle = css`
 
 // TODO: Decide if this is the right max width based on Figma designs
 const pageWidthStyle = css`
-  width: 600px;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    width: 600px;
+  }
 `;
 
 const PageWidth = ({ children }: { children?: ReactNode }): JSX.Element => {

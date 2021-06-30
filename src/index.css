@@ -39,3 +39,11 @@ body {
       this article super convincing
     */
 }
+
+a {
+  color: #0065ffcc;
+}
+
+a:visited {
+  color: rgba(55, 0, 255, 0.8);
+}

@@ -97,9 +97,6 @@ const NowPlaying = ({
   fixed: boolean;
   experience: Experience;
 }): JSX.Element => {
-  // We gotta find a way to breakpoint this. Or combine CSS styles?
-  const height = 248;
-
   return (
     <div css={containerStyle}>
       <div css={headerTextContainerStyle(!fixed)}>

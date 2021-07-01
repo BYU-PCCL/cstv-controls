@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useState } from "react";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";
 import ReactDOM from "react-dom";
 import { Masonry } from "masonic";
+import ExperienceModal from "./ExperienceModal";
 
 const containerStyle = css`
   min-height: 100vh;
@@ -27,6 +28,11 @@ const tileStyle = (backgroundColor: string) => css`
   transition: transform 100ms ease-in-out;
   width: 100%;
   min-height: 100px;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(98%);
+  }
 `;
 
 const thumbnailStyle = css`
@@ -47,8 +53,26 @@ const ExperienceList = ({
 }: {
   experiences: Experience[];
 }): JSX.Element => {
+  const [dialogExperience, setDialogExperience] = useState<
+    Experience | undefined
+  >();
+
+  const onExperienceClicked = (id: string) => {
+    console.log("The " + id + " experience was clicked.");
+    const experience = experiences.find((experience) => experience.id == id);
+    if (experience == null) {
+      return;
+    }
+    setDialogExperience(experience);
+  };
+
+  const onDialogClosed = () => {
+    setDialogExperience(undefined);
+  };
+
   return (
     <main css={containerStyle}>
+      <ExperienceModal experience={dialogExperience} onClose={onDialogClosed} />
       <div css={masonicStyle}>
         <Masonry
           // Provides the data for our grid items
@@ -60,7 +84,9 @@ const ExperienceList = ({
           // Pre-renders 5 windows worth of content
           overscanBy={5}
           // This is the grid item component
-          render={ExperienceTile}
+          render={({ data }) => (
+            <ExperienceTile data={data} onClick={onExperienceClicked} />
+          )}
         />
       </div>
     </main>
@@ -69,11 +95,13 @@ const ExperienceList = ({
 
 const ExperienceTile = ({
   data: { id, title, thumbnail, colors },
+  onClick,
 }: {
   data: Experience;
+  onClick: (id: string) => void;
 }) => (
-  <div css={tileStyle(colors.primary)}>
-    <img css={thumbnailStyle} src={thumbnail} />
+  <div css={tileStyle(colors.primary)} onClick={() => onClick(id)}>
+    <img css={thumbnailStyle} src={thumbnail.small} />
     <p css={textStyle(colors.secondaryLight)}>{title}</p>
   </div>
 );

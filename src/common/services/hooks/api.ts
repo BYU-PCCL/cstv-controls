@@ -18,6 +18,7 @@ import { Experience } from "../../../types/experience";
 import { Collection } from "../../../types/collection";
 import { ApiError, setAuthCode } from "../apiUtils";
 import { ApiStatusResponse } from "../../../types/response";
+import { useDebounce } from "../../hooks";
 
 const RETRY_COUNT = 3;
 
@@ -49,8 +50,15 @@ export const useCollections = (): UseQueryResult<
   ApiError
 > => useQueryRetryUnless400(["collections"], getCollections);
 
-export const useCurrentExperience = (): UseQueryResult<Experience, ApiError> =>
-  useQueryRetryUnless400(["current"], getCurrentExperience);
+export const useCurrentExperience = (
+  delay = 100
+): UseQueryResult<Experience, ApiError> =>
+  useDebounce(
+    useQueryRetryUnless400(["current"], getCurrentExperience, {
+      refetchInterval: 500,
+    }),
+    delay
+  );
 
 export const useCurrentExperienceMutation = (): UseMutationResult<
   ApiStatusResponse,

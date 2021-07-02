@@ -5,24 +5,9 @@ import Dialog, { DialogProps } from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
-import { TransitionProps } from "@material-ui/core/transitions";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";
 import { makeStyles } from "@material-ui/core/styles";
-import { background } from "@storybook/theming";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const actionsStyle = css`
-  color: blue;
-`;
 
 const useCardStyles = (backgroundColor: string) =>
   makeStyles({
@@ -58,13 +43,23 @@ const useActionStyles = () =>
     },
   })();
 
-const useButtonStyles = () =>
+const useButtonStyles = (secondaryLight: string, secondaryDark: string) =>
   makeStyles({
     root: {
       fontFamily: `"Source Code Pro", monospace`,
+      fontSize: "18px",
+      padding: "14px 18px",
     },
-    text: {},
-    contained: {},
+    text: {
+      color: secondaryDark,
+    },
+    contained: {
+      padding: "8px 28px",
+      color: secondaryLight,
+      backgroundColor: secondaryDark,
+      borderRadius: "6px",
+      boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+    },
   })();
 
 const titleStyle = css`
@@ -96,7 +91,10 @@ const ExperienceModal = ({
     experience?.colors.secondaryLight || "black"
   );
   const actionClasses = useActionStyles();
-  const buttonClasses = useButtonStyles();
+  const buttonClasses = useButtonStyles(
+    experience?.colors.secondaryLight || "pink",
+    experience?.colors.secondaryDark || "black"
+  );
 
   const maxWidth = "xs";
 
@@ -104,7 +102,6 @@ const ExperienceModal = ({
     <div>
       <Dialog
         open={experience != null}
-        TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
         maxWidth={maxWidth}

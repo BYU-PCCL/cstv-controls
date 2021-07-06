@@ -105,7 +105,11 @@ const NowPlaying = ({
       </div>
       {experience != null && (
         <div css={imageContainerStyle}>
-          <img src="https://lorempixel.com/800/500/" alt="" css={imageStyle} />
+          <img
+            src={experience?.thumbnails.wide || ""}
+            alt=""
+            css={imageStyle}
+          />
           <div css={imageOverlayContainerStyle("#0B1D39", "#ffffff")}>
             <SettingsRemoteIcon fontSize="large" />
             <h2 css={controlPromptTextStyle}>Tap to control</h2>

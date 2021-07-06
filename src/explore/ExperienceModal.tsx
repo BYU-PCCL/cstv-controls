@@ -65,10 +65,12 @@ const useButtonStyles = makeStyles({
     "&:hover": {
       backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
       transform: "scale(102%)",
+      "-webkit-transform": "scale(1.02, 1.02);",
       boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary}4d`,
     },
     "&:active": {
       transform: "scale(96%)",
+      "-webkit-transform": "scale(0.96, 0.96);",
     },
   },
 });
@@ -84,6 +86,11 @@ const descriptionStyle = css`
   margin: 10px 0 0;
   font-family: "Lato", sans-serif;
   opacity: 81%;
+`;
+
+const imageStyle = css`
+  width: 100%;
+  object-fit: cover;
 `;
 
 const defaultColors: Colors = {
@@ -141,7 +148,11 @@ const ExperienceModal = ({
         paper: cardClasses.paper,
       }}
     >
-      <img src={lastExperience?.thumbnails?.wide || ""} alt="" />
+      <img
+        css={imageStyle}
+        src={lastExperience?.thumbnails?.wide || ""}
+        alt=""
+      />
 
       <DialogContent
         classes={{

@@ -29,6 +29,7 @@ const tileStyle = (backgroundColor: string) => css`
 
   &:active {
     transform: scale(98%);
+    -webkit-transform: scale(0.98, 0.98);
   }
 `;
 

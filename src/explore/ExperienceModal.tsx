@@ -60,12 +60,12 @@ const useButtonStyles = makeStyles({
     color: ({ secondaryLight }: Colors) => secondaryLight,
     backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
     borderRadius: "6px",
-    boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+    boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary}4d`,
     transition: "transform 100ms",
     "&:hover": {
       backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
       transform: "scale(102%)",
-      boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+      boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary}4d`,
     },
     "&:active": {
       transform: "scale(96%)",

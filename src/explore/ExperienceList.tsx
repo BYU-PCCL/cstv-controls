@@ -58,7 +58,7 @@ const ExperienceList = ({
         items={experiences}
         columnGutter={8}
         columnWidth={148}
-        overscanBy={1}
+        overscanBy={2}
         render={({ data }: { data: Experience }) => (
           <ExperienceTile experience={data} onClick={onExperienceClick} />
         )}

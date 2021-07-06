@@ -1,66 +1,62 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
-import Dialog, { DialogProps } from "@material-ui/core/Dialog";
+import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Colors } from "../types/colors";
 
-const useCardStyles = (backgroundColor: string) =>
-  makeStyles({
-    paper: {
-      backgroundColor,
-      borderRadius: "8px",
-    },
-  })();
+const useCardStyles = makeStyles({
+  paper: {
+    backgroundColor: ({ secondaryLight }: Colors) => secondaryLight,
+    borderRadius: "8px",
+  },
+});
 
-const useContentStyles = (backgroundColor: string) =>
-  makeStyles({
-    root: {
-      backgroundColor: backgroundColor,
-      padding: "0",
-      margin: "-10",
-    },
-  })();
+const useContentStyles = makeStyles({
+  root: {
+    backgroundColor: ({ primary }: Colors) => primary,
+    padding: "0",
+    margin: "-10",
+  },
+});
 
-const useContentTextStyles = (color: string) =>
-  makeStyles({
-    root: {
-      color,
-      padding: "18px 20px",
-    },
-  })();
+const useContentTextStyles = makeStyles({
+  root: {
+    color: ({ secondaryLight }: Colors) => secondaryLight,
+    padding: "18px 20px",
+  },
+});
 
-const useActionStyles = () =>
-  makeStyles({
-    root: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-evenly",
-    },
-  })();
+const useActionStyles = makeStyles({
+  root: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+});
 
-const useButtonStyles = (secondaryLight: string, secondaryDark: string) =>
-  makeStyles({
-    root: {
-      fontFamily: `"Source Code Pro", monospace`,
-      fontSize: "18px",
-      padding: "14px 18px",
-    },
-    text: {
-      color: secondaryDark,
-    },
-    contained: {
-      padding: "8px 28px",
-      color: secondaryLight,
-      backgroundColor: secondaryDark,
-      borderRadius: "6px",
-      boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
-    },
-  })();
+const useButtonStyles = makeStyles({
+  root: {
+    fontFamily: `"Source Code Pro", monospace`,
+    fontSize: "18px",
+    padding: "14px 18px",
+  },
+  text: {
+    color: ({ secondaryDark }: Colors) => secondaryDark,
+  },
+  contained: {
+    padding: "8px 28px",
+    color: ({ secondaryLight }: Colors) => secondaryLight,
+    backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
+    borderRadius: "6px",
+    boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+  },
+});
 
 const titleStyle = css`
   font-size: 22px;
@@ -75,88 +71,109 @@ const descriptionStyle = css`
   opacity: 81%;
 `;
 
+const defaultColors: Colors = {
+  primary: "#212121",
+  secondaryLight: "#fafafa",
+  secondaryDark: "#252525",
+};
+
 const ExperienceModal = ({
   experience,
   onClose,
+  onLaunch,
 }: {
   experience?: Experience;
   onClose: () => void;
+  onLaunch: (experience: Experience) => void;
 }): JSX.Element => {
-  const cardClasses = useCardStyles(
-    experience?.colors.secondaryLight || "white"
-  );
+  const [lastExperience, setLastExperience] = useState<
+    Experience | undefined
+  >();
 
-  const contentClasses = useContentStyles(experience?.colors.primary || "blue");
+  useEffect(() => {
+    if (experience == null) {
+      return;
+    }
+
+    setLastExperience(experience);
+  }, [experience]);
+
+  const cardClasses = useCardStyles(lastExperience?.colors || defaultColors);
+
+  const contentClasses = useContentStyles(
+    lastExperience?.colors || defaultColors
+  );
   const contentTextClasses = useContentTextStyles(
-    experience?.colors.secondaryLight || "black"
+    lastExperience?.colors || defaultColors
   );
   const actionClasses = useActionStyles();
   const buttonClasses = useButtonStyles(
-    experience?.colors.secondaryLight || "pink",
-    experience?.colors.secondaryDark || "black"
+    lastExperience?.colors || defaultColors
   );
 
-  const maxWidth = "xs";
+  const onLaunchFn = useCallback(
+    () => experience && onLaunch(experience),
+    [experience]
+  );
 
   return (
-    <div>
-      <Dialog
-        open={experience != null}
-        keepMounted
-        onClose={onClose}
-        maxWidth={maxWidth}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
+    <Dialog
+      open={experience != null}
+      onClose={onClose}
+      maxWidth="xs"
+      fullWidth
+      classes={{
+        paper: cardClasses.paper,
+      }}
+    >
+      <img src={lastExperience?.thumbnails?.wide || ""} alt="" />
+
+      <DialogContent
         classes={{
-          paper: cardClasses.paper,
+          root: contentClasses.root,
         }}
       >
-        <img src={experience?.thumbnail.large || ""} alt="" />
-
-        <DialogContent
+        <DialogContentText
+          id="alert-dialog-slide-description"
           classes={{
-            root: contentClasses.root,
+            root: contentTextClasses.root,
           }}
         >
-          <DialogContentText
-            id="alert-dialog-slide-description"
-            classes={{
-              root: contentTextClasses.root,
+          <h1 css={titleStyle}>{lastExperience?.title || "ERROR"}</h1>
+          <p
+            css={descriptionStyle}
+            dangerouslySetInnerHTML={{
+              __html: lastExperience?.description || "",
             }}
-          >
-            <h1 css={titleStyle}>{experience?.title || "ERROR"}</h1>
-            <p css={descriptionStyle}>
-              {experience?.description || "no description found"}
-            </p>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions
+          />
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions
+        classes={{
+          root: actionClasses.root,
+        }}
+      >
+        <Button
+          onClick={onClose}
           classes={{
-            root: actionClasses.root,
+            root: buttonClasses.root,
+            text: buttonClasses.text,
           }}
         >
-          <Button
-            onClick={onClose}
-            classes={{
-              root: buttonClasses.root,
-              text: buttonClasses.text,
-            }}
-          >
-            CANCEL
-          </Button>
-          <Button
-            onClick={onClose}
-            variant="contained"
-            classes={{
-              root: buttonClasses.root,
-              contained: buttonClasses.contained,
-            }}
-          >
-            LAUNCH
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+          CANCEL
+        </Button>
+        <Button
+          onClick={onLaunchFn}
+          variant="contained"
+          classes={{
+            root: buttonClasses.root,
+            contained: buttonClasses.contained,
+          }}
+        >
+          LAUNCH
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

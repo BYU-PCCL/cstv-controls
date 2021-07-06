@@ -1,20 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React, { memo } from "react";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";
-import ReactDOM from "react-dom";
 import { Masonry } from "masonic";
-import ExperienceModal from "./ExperienceModal";
-
-const containerStyle = css`
-  min-height: 100vh;
-  width: 100%;
-`;
 
 const masonicStyle = css`
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
+  margin: 8px;
+  width: calc(100% - 16px);
+
+  @media (min-width: 500px) {
+    margin: 16px;
+    width: calc(100% - 32px);
+  }
 `;
 
 const tileStyle = (backgroundColor: string) => css`
@@ -50,60 +47,44 @@ const textStyle = (color: string) => css`
 
 const ExperienceList = ({
   experiences,
+  onExperienceClick,
 }: {
   experiences: Experience[];
+  onExperienceClick: (experience: Experience) => void;
 }): JSX.Element => {
-  const [dialogExperience, setDialogExperience] = useState<
-    Experience | undefined
-  >();
-
-  const onExperienceClicked = (id: string) => {
-    console.log("The " + id + " experience was clicked.");
-    const experience = experiences.find((experience) => experience.id == id);
-    if (experience == null) {
-      return;
-    }
-    setDialogExperience(experience);
-  };
-
-  const onDialogClosed = () => {
-    setDialogExperience(undefined);
-  };
-
   return (
-    <main css={containerStyle}>
-      <ExperienceModal experience={dialogExperience} onClose={onDialogClosed} />
-      <div css={masonicStyle}>
-        <Masonry
-          // Provides the data for our grid items
-          items={experiences}
-          // Adds 8px of space between the grid cells
-          columnGutter={8}
-          // Sets the minimum column width to 172px
-          columnWidth={148}
-          // Pre-renders 5 windows worth of content
-          overscanBy={5}
-          // This is the grid item component
-          render={({ data }) => (
-            <ExperienceTile data={data} onClick={onExperienceClicked} />
-          )}
-        />
-      </div>
-    </main>
+    <div css={masonicStyle}>
+      <Masonry
+        items={experiences}
+        columnGutter={8}
+        columnWidth={148}
+        overscanBy={1}
+        render={({ data }: { data: Experience }) => (
+          <ExperienceTile experience={data} onClick={onExperienceClick} />
+        )}
+      />
+    </div>
   );
 };
 
-const ExperienceTile = ({
-  data: { id, title, thumbnail, colors },
-  onClick,
-}: {
-  data: Experience;
-  onClick: (id: string) => void;
-}) => (
-  <div css={tileStyle(colors.primary)} onClick={() => onClick(id)}>
-    <img css={thumbnailStyle} src={thumbnail.small} />
-    <p css={textStyle(colors.secondaryLight)}>{title}</p>
-  </div>
+const ExperienceTile = memo(
+  ({
+    experience,
+    onClick,
+  }: {
+    experience: Experience;
+    onClick: (experience: Experience) => void;
+  }) => {
+    const { colors, thumbnails, title } = experience;
+    return (
+      <div css={tileStyle(colors.primary)} onClick={() => onClick(experience)}>
+        <img css={thumbnailStyle} src={thumbnails.thumb} />
+        <p css={textStyle(colors.secondaryLight)}>{title}</p>
+      </div>
+    );
+  }
 );
+
+ExperienceTile.displayName = "ExperienceTile";
 
 export default ExperienceList;

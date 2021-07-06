@@ -34,6 +34,7 @@ export const ExperienceModal: ComponentStory<typeof ExperienceModalComponent> =
         onClose={() => {
           return TestExperience;
         }}
+        onLaunch={(experience: Experience) => undefined}
       />
     </PageWidth>
   );

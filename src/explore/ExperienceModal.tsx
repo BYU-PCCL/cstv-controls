@@ -48,6 +48,12 @@ const useButtonStyles = makeStyles({
   },
   text: {
     color: ({ secondaryDark }: Colors) => secondaryDark,
+    "&:hover": {
+      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark + "30",
+    },
+    "&:active": {
+      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark + "50",
+    },
   },
   contained: {
     padding: "8px 28px",
@@ -55,6 +61,15 @@ const useButtonStyles = makeStyles({
     backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
     borderRadius: "6px",
     boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+    transition: "transform 100ms",
+    "&:hover": {
+      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
+      transform: "scale(102%)",
+      boxShadow: "0px 4px 6px rgba(129, 45, 27, 0.3)",
+    },
+    "&:active": {
+      transform: "scale(96%)",
+    },
   },
 });
 
@@ -154,6 +169,8 @@ const ExperienceModal = ({
         }}
       >
         <Button
+          disableRipple
+          disableElevation
           onClick={onClose}
           classes={{
             root: buttonClasses.root,
@@ -163,6 +180,8 @@ const ExperienceModal = ({
           CANCEL
         </Button>
         <Button
+          disableRipple
+          disableElevation
           onClick={onLaunchFn}
           variant="contained"
           classes={{

@@ -7,6 +7,15 @@ import PageWidth from "../common/PageWidth";
 import { MemoryRouter } from "react-router-dom";
 
 const testExperience: Experience = {
+  colors: {
+    primary: "",
+    secondaryLight: "",
+    secondaryDark: "",
+  },
+  thumbnails: {
+    thumb: "",
+    wide: "",
+  },
   id: "test",
   title: "Real-time Tracking by Detection of Human Motion",
   lastUpdate: 500,

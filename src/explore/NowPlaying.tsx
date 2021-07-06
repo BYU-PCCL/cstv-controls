@@ -110,7 +110,12 @@ const NowPlaying = ({
             alt=""
             css={imageStyle}
           />
-          <div css={imageOverlayContainerStyle("#0B1D39", "#ffffff")}>
+          <div
+            css={imageOverlayContainerStyle(
+              experience?.colors.primary || "#212121",
+              experience?.colors.secondaryLight || "#fafafa"
+            )}
+          >
             <SettingsRemoteIcon fontSize="large" />
             <h2 css={controlPromptTextStyle}>Tap to control</h2>
           </div>

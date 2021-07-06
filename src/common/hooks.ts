@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 // useHooks project
 export const useDebounce = <T>(value: T, delay: number): T => {
   // State and setters for debounced value
-  const [debouncedValue, setDebouncedValue] = useState(value);
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
   useEffect(
     () => {
       // Update debounced value after delay

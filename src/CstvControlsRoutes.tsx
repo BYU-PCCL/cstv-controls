@@ -12,6 +12,7 @@ import ErrorPage from "./common/ErrorPage";
 import { useCurrentExperience } from "./common/services/hooks/api";
 import LoadingPage from "./common/LoadingPage";
 import { isAuthAvailable } from "./common/services/apiUtils";
+import { useDebounce } from "./common/hooks";
 
 const ApiDependentRoute = ({
   children,
@@ -24,7 +25,10 @@ const ApiDependentRoute = ({
   // TODO: Decide if we want to create a route for authentication specifically
   //  instead of relying on 401 responses from the API. They're cached though,
   //  which is nice.
-  const { status, error } = useCurrentExperience();
+  const { status, error } = useDebounce(
+    useCurrentExperience(["status", "error"]),
+    100
+  );
 
   return (
     <Route

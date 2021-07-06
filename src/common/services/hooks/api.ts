@@ -1,4 +1,5 @@
 import {
+  InfiniteQueryObserverResult,
   QueryFunction,
   QueryKey,
   useMutation,
@@ -18,7 +19,6 @@ import { Experience } from "../../../types/experience";
 import { Collection } from "../../../types/collection";
 import { ApiError, setAuthCode } from "../apiUtils";
 import { ApiStatusResponse } from "../../../types/response";
-import { useDebounce } from "../../hooks";
 
 const RETRY_COUNT = 3;
 
@@ -51,14 +51,15 @@ export const useCollections = (): UseQueryResult<
 > => useQueryRetryUnless400(["collections"], getCollections);
 
 export const useCurrentExperience = (
-  delay = 100
+  notifyOnChangeProps: Array<keyof InfiniteQueryObserverResult> | "tracked" = [
+    "data",
+    "error",
+  ]
 ): UseQueryResult<Experience, ApiError> =>
-  useDebounce(
-    useQueryRetryUnless400(["current"], getCurrentExperience, {
-      refetchInterval: 500,
-    }),
-    delay
-  );
+  useQueryRetryUnless400(["current"], getCurrentExperience, {
+    refetchInterval: 500,
+    notifyOnChangeProps: notifyOnChangeProps,
+  });
 
 export const useCurrentExperienceMutation = (): UseMutationResult<
   ApiStatusResponse,

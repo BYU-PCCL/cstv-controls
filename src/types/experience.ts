@@ -1,10 +1,5 @@
+import { Colors } from "./colors";
 import { Thumbnails } from "./thumbnails";
-
-export interface ExperienceColors {
-  primary: string;
-  secondaryLight: string;
-  secondaryDark: string;
-}
 
 export interface Experience {
   id: string;
@@ -14,8 +9,8 @@ export interface Experience {
   artist?: string;
   collection?: string;
   lifetime?: number;
-  colors: ExperienceColors;
-  thumbnail: Thumbnails;
+  colors: Colors;
+  thumbnails: Thumbnails;
 }
 
 export interface CurrentExperience extends Experience {

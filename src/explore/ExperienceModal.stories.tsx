@@ -10,9 +10,9 @@ const TestExperience: Experience = {
   title: "Style Transfer",
   description: "Ever wondered what you'd look like in a van goh painting?",
   lastUpdate: 500,
-  thumbnail: {
-    small: "https://via.placeholder.com/148x148",
-    large: "https://via.placeholder.com/300x180px",
+  thumbnails: {
+    thumb: "https://via.placeholder.com/148x148",
+    wide: "https://via.placeholder.com/300x180px",
   },
   colors: {
     primary: "#812D1B",

@@ -1,4 +1,4 @@
 export interface Thumbnails {
-  small: string;
-  large: string;
+  thumb: string;
+  wide: string;
 }

@@ -10,9 +10,9 @@ const testExperienceList: Experience[] = [
     id: "test2",
     title: "Style Transfer",
     lastUpdate: 500,
-    thumbnail: {
-      small: "https://via.placeholder.com/148x148",
-      large: "https://via.placeholder.com/300x180",
+    thumbnails: {
+      thumb: "https://via.placeholder.com/148x148",
+      wide: "https://via.placeholder.com/300x180",
     },
     colors: {
       primary: "#737311",
@@ -24,9 +24,9 @@ const testExperienceList: Experience[] = [
     id: "test",
     title: "Animation video from cool students",
     lastUpdate: 500,
-    thumbnail: {
-      small: "https://via.placeholder.com/148x148",
-      large: "https://via.placeholder.com/300x180",
+    thumbnails: {
+      thumb: "https://via.placeholder.com/148x148",
+      wide: "https://via.placeholder.com/300x180",
     },
     colors: {
       primary: "#812D1B",

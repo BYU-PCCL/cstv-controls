@@ -1,5 +1,5 @@
 const BASE_URL: string =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:8001/api/";
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8001/api/";
 
 const AUTH_CODE_STORAGE_KEY = "cstvAuth";
 

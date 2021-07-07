@@ -14,9 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    // See https://github.com/emotion-js/emotion/issues/1249#issuecomment-828088254
-    "jsxImportSource": "@emotion/react"
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }

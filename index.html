@@ -7,13 +7,9 @@
       https://css-tricks.com/svg-favicons-and-all-the-fun-things-we-can-do-with-them/
       for more background on SVG favicons
     -->
-    <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned.tab.svg" />
-    <link
-      rel="alternate icon"
-      type="image/png"
-      href="%PUBLIC_URL%/favicon-32.png"
-    />
-    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
+    <link rel="mask-icon" href="/safari-pinned.tab.svg" />
+    <link rel="alternate icon" type="image/png" href="/favicon-32.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0B1D39" />
@@ -33,17 +29,18 @@
     -->
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/favicon-192.png" />
     <meta name="twitter:card" content="summary" />
     <!--
     TODO: Set this once we have a domain name (or provide it with an env variable somehow)
     <meta property="og:url" content="">
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <title>CS Wall</title>
   </head>
   <body>
     <noscript>Enable JavaScript to interact with the CS Wall.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

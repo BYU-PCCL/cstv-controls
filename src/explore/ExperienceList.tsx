@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { memo } from "react";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";

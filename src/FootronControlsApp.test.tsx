@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import CstvControlsApp from "./CstvControlsApp";
+import FootronControlsApp from "./FootronControlsApp";
 
 test("renders learn react link", () => {
-  render(<CstvControlsApp />);
+  render(<FootronControlsApp />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });

@@ -1,7 +1,7 @@
 const BASE_URL: string =
   process.env.REACT_APP_API_BASE_URL || "http://localhost:8001/api/";
 
-const AUTH_CODE_STORAGE_KEY = "cstvAuth";
+const AUTH_CODE_STORAGE_KEY = "footronAuth";
 
 const getEndpointUrl = (endpoint: string) =>
   new URL(endpoint, BASE_URL).toString();

@@ -64,7 +64,7 @@ const ApiDependentRoute = ({
   );
 };
 
-function CstvControlsRoutes(): JSX.Element {
+function FootronControlsRoutes(): JSX.Element {
   return (
     <Router>
       <Switch>
@@ -91,4 +91,4 @@ function CstvControlsRoutes(): JSX.Element {
   );
 }
 
-export default CstvControlsRoutes;
+export default FootronControlsRoutes;

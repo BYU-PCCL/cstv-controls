@@ -1,4 +1,4 @@
-# cstv-controls
+# footron-controls
 
 ## Installation
 

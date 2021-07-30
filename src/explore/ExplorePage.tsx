@@ -9,6 +9,8 @@ import PageWidth from "../common/PageWidth";
 import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
 import ExperienceList from "./ExperienceList";
 import ExperienceModal from "./ExperienceModal";
+import { hasControls } from "../controls/util";
+import { useHistory } from "react-router-dom";
 
 const MemoizedExperienceList = memo(ExperienceList);
 
@@ -17,6 +19,9 @@ const ExplorePage = (): JSX.Element => {
   const { data: experiencesMap } = useExperiences();
   const { data: currentExperience } = useCurrentExperience();
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [experiencesWithoutCurrent, setExperiencesWithoutCurrent] = useState<
+    Experience[]
+  >([]);
 
   const [dialogExperience, setDialogExperience] = useState<
     Experience | undefined
@@ -45,6 +50,9 @@ const ExplorePage = (): JSX.Element => {
     (experience: Experience) => {
       currentExperienceMutation.mutate(experience.id);
       onDialogClosed();
+      if (hasControls(experience.id)) {
+        history.push(`/controls/${experience.id}`);
+      }
     },
     [experiences, setDialogExperience]
   );

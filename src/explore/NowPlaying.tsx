@@ -3,10 +3,16 @@ import { css } from "@emotion/react";
 import React from "react";
 import { Experience } from "../types/experience";
 import SettingsRemoteIcon from "@material-ui/icons/SettingsRemoteRounded";
+import { Link } from "react-router-dom";
+import { hasControls } from "../controls/util";
 
 const containerStyle = css`
   display: flex;
   flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 const headerTextContainerStyle = (visible: boolean) => css`
@@ -110,15 +116,19 @@ const NowPlaying = ({
             alt=""
             css={imageStyle}
           />
-          <div
-            css={imageOverlayContainerStyle(
-              experience?.colors.primary || "#212121",
-              experience?.colors.secondaryLight || "#fafafa"
-            )}
-          >
-            <SettingsRemoteIcon fontSize="large" />
-            <h2 css={controlPromptTextStyle}>Tap to control</h2>
-          </div>
+          {hasControls(experience.id) && (
+            <Link to={`/controls/${experience?.id}`}>
+              <div
+                css={imageOverlayContainerStyle(
+                  experience?.colors.primary || "#212121",
+                  experience?.colors.secondaryLight || "#fafafa"
+                )}
+              >
+                <SettingsRemoteIcon fontSize="large" />
+                <h2 css={controlPromptTextStyle}>Tap to control</h2>
+              </div>
+            </Link>
+          )}
         </div>
       )}
     </div>

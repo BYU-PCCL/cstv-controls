@@ -21,7 +21,19 @@ const getRequestWithBodyHeaders = (contentType?: string) => ({
 
 const getJsonResponsePromise = <T>(
   pendingResponse: Promise<Response>
-): Promise<T> => pendingResponse.then((res) => res.json());
+): Promise<T> =>
+  pendingResponse
+    .then((res) => res.json())
+    .then((data) => {
+      // If object is {}, just make it undefined
+      if (
+        data != null &&
+        Object.keys(data as unknown as Record<string, unknown>).length === 0
+      ) {
+        return undefined;
+      }
+      return data;
+    });
 
 const checkedRequest = async (
   pendingResponse: Promise<Response>

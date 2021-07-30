@@ -29,6 +29,18 @@ const ExplorePage = (): JSX.Element => {
     [experiences, setDialogExperience]
   );
 
+  useEffect(() => {
+    let experiencesWithout = [...experiences];
+    if (currentExperience) {
+      experiencesWithout = experiencesWithout.filter(
+        (experience) => experience.id !== currentExperience.id
+      );
+    }
+    setExperiencesWithoutCurrent(experiencesWithout);
+  }, [experiences, currentExperience]);
+
+  const history = useHistory();
+
   const onExperienceLaunched = useCallback(
     (experience: Experience) => {
       currentExperienceMutation.mutate(experience.id);
@@ -55,12 +67,10 @@ const ExplorePage = (): JSX.Element => {
         onClose={onDialogClosed}
         onLaunch={onExperienceLaunched}
       />
-      {currentExperience && (
-        <ExploreCollapsingHeader experience={currentExperience} />
-      )}
+      <ExploreCollapsingHeader experience={currentExperience} />
       {experiences.length > 0 && (
         <MemoizedExperienceList
-          experiences={experiences}
+          experiences={experiencesWithoutCurrent}
           onExperienceClick={onExperienceClicked}
         />
       )}

@@ -1,4 +1,4 @@
-# footron-controls
+# @footron/web
 
 ## Installation
 

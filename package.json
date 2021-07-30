@@ -1,5 +1,5 @@
 {
-  "name": "footron-controls",
+  "name": "@footron/web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

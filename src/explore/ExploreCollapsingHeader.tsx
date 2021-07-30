@@ -14,7 +14,7 @@ const ExploreCollapsingHeader = ({
   return (
     <div>
       <Header collapsed={collapsed} />
-      <NowPlaying fixed={collapsed} experience={experience} />
+      {experience && <NowPlaying fixed={collapsed} experience={experience} />}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import { Experience } from "../types/experience";
 import { css } from "@emotion/react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,15 +19,10 @@ const useCardStyles = makeStyles({
 const useContentStyles = makeStyles({
   root: {
     backgroundColor: ({ primary }: Colors) => primary,
-    padding: "0",
-    margin: "-10",
-  },
-});
-
-const useContentTextStyles = makeStyles({
-  root: {
     color: ({ secondaryLight }: Colors) => secondaryLight,
-    padding: "18px 20px",
+    // TODO: Decide if these are good numbers for padding here
+    padding: "20px 24px",
+    margin: "-10",
   },
 });
 
@@ -125,9 +119,6 @@ const ExperienceModal = ({
   const contentClasses = useContentStyles(
     lastExperience?.colors || defaultColors
   );
-  const contentTextClasses = useContentTextStyles(
-    lastExperience?.colors || defaultColors
-  );
   const actionClasses = useActionStyles();
   const buttonClasses = useButtonStyles(
     lastExperience?.colors || defaultColors
@@ -159,20 +150,13 @@ const ExperienceModal = ({
           root: contentClasses.root,
         }}
       >
-        <DialogContentText
-          id="alert-dialog-slide-description"
-          classes={{
-            root: contentTextClasses.root,
+        <h1 css={titleStyle}>{lastExperience?.title || "ERROR"}</h1>
+        <p
+          css={descriptionStyle}
+          dangerouslySetInnerHTML={{
+            __html: lastExperience?.description || "",
           }}
-        >
-          <h1 css={titleStyle}>{lastExperience?.title || "ERROR"}</h1>
-          <p
-            css={descriptionStyle}
-            dangerouslySetInnerHTML={{
-              __html: lastExperience?.description || "",
-            }}
-          />
-        </DialogContentText>
+        />
       </DialogContent>
       <DialogActions
         classes={{

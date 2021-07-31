@@ -45,6 +45,16 @@ export const useExperiences = (): UseQueryResult<
   ApiError
 > => useQueryRetryUnless400(["experiences"], getExperiences);
 
+export const useExperience = (id: string): Experience | undefined => {
+  const { data: experiencesMap } = useExperiences();
+
+  if (experiencesMap == null || !(id in experiencesMap)) {
+    return undefined;
+  }
+
+  return experiencesMap[id];
+};
+
 export const useCollections = (): UseQueryResult<
   Record<string, Collection>,
   ApiError

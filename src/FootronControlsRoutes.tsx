@@ -5,6 +5,7 @@ import {
   Switch,
   Link,
   RouteProps,
+  Redirect,
 } from "react-router-dom";
 import ExplorePage from "./explore/ExplorePage";
 import AuthCodeRoute from "./AuthCodeRoute";
@@ -13,6 +14,8 @@ import { useCurrentExperience } from "./common/services/hooks/api";
 import LoadingPage from "./common/LoadingPage";
 import { isAuthAvailable } from "./common/services/apiUtils";
 import { useDebounce } from "./common/hooks";
+import ControlsPage from "./controls/ControlsPage";
+import { hasControls } from "./controls/util";
 
 const ApiDependentRoute = ({
   children,
@@ -64,6 +67,19 @@ const ApiDependentRoute = ({
   );
 };
 
+const ControlsRoute = (): JSX.Element => (
+  <Route
+    exact
+    path="/controls/:id"
+    render={({ match }) => {
+      if (!hasControls(match.params.id)) {
+        return <Redirect to="/" />;
+      }
+      return <ControlsPage />;
+    }}
+  />
+);
+
 function FootronControlsRoutes(): JSX.Element {
   return (
     <Router>
@@ -71,6 +87,7 @@ function FootronControlsRoutes(): JSX.Element {
         <ApiDependentRoute exact path="/">
           <ExplorePage />
         </ApiDependentRoute>
+        <ControlsRoute />
         <Route exact path="/c/:code">
           <AuthCodeRoute />
         </Route>

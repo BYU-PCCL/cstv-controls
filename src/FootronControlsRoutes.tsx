@@ -84,13 +84,13 @@ function FootronControlsRoutes(): JSX.Element {
   return (
     <Router>
       <Switch>
+        <Route exact path="/c/:code">
+          <AuthCodeRoute />
+        </Route>
         <ApiDependentRoute exact path="/">
           <ExplorePage />
         </ApiDependentRoute>
         <ControlsRoute />
-        <Route exact path="/c/:code">
-          <AuthCodeRoute />
-        </Route>
         <Route path="*">
           <ErrorPage
             title={"Error 404"}

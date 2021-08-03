@@ -1,23 +1,16 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import FootronControlsRoutes from "./FootronControlsRoutes";
-import {
-  ControlsClient,
-  ControlsClientProvider,
-} from "@footron/controls-client";
+import FootronControlsClientProvider from "./FootronControlsClientProvider";
 
 const queryClient = new QueryClient();
-const controlsClient = new ControlsClient(
-  "ws://localhost:8088/messaging/in/",
-  "dev"
-);
 
 function FootronControlsApp(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
-      <ControlsClientProvider client={controlsClient}>
+      <FootronControlsClientProvider>
         <FootronControlsRoutes />
-      </ControlsClientProvider>
+      </FootronControlsClientProvider>
     </QueryClientProvider>
   );
 }

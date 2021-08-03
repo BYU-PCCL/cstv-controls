@@ -6,8 +6,11 @@ const AUTH_CODE_STORAGE_KEY = "footronAuth";
 const getEndpointUrl = (endpoint: string) =>
   new URL(endpoint, BASE_URL).toString();
 
+export const getAuthCode = (): string | null =>
+  localStorage.getItem(AUTH_CODE_STORAGE_KEY);
+
 const getAuthHeaders = () => ({
-  "X-AUTH-CODE": localStorage.getItem(AUTH_CODE_STORAGE_KEY) || "",
+  "X-AUTH-CODE": getAuthCode() || "",
 });
 
 const getContentTypeHeaders = (contentType = "application/json") => ({

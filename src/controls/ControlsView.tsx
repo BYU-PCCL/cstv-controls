@@ -50,6 +50,10 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
   }, [id, controlsClient, currentExperience, mutateCurrentExperience]);
 
   useEffect(() => {
+    if (!controlsClient) {
+      return;
+    }
+
     controlsClient.unpause();
     return () => {
       controlsClient.pause();

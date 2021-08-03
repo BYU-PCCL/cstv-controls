@@ -2113,6 +2113,60 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@footron/web@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@footron/web@workspace:."
+  dependencies:
+    "@emotion/react": ^11.4.0
+    "@footron/controls-client": ^0.1.14
+    "@material-ui/core": ^4.12.3
+    "@material-ui/icons": ^4.11.2
+    "@mdx-js/react": ^1.6.22
+    "@storybook/addon-actions": ^6.3.6
+    "@storybook/addon-docs": ^6.3.6
+    "@storybook/addon-essentials": ^6.3.6
+    "@storybook/addon-links": ^6.3.6
+    "@storybook/addons": ^6.3.6
+    "@storybook/node-logger": ^6.3.6
+    "@storybook/preset-create-react-app": ^3.2.0
+    "@storybook/react": ^6.3.6
+    "@storybook/theming": ^6.3.6
+    "@testing-library/jest-dom": ^5.14.1
+    "@testing-library/react": ^12.0.0
+    "@testing-library/user-event": ^13.2.1
+    "@types/jest": ^26.0.24
+    "@types/lodash": ^4.14.171
+    "@types/node": ^16.4.8
+    "@types/react": ^17.0.15
+    "@types/react-dom": ^17.0.9
+    "@types/react-router-dom": ^5.1.8
+    "@types/testing-library__jest-dom": ^5.14.1
+    "@typescript-eslint/eslint-plugin": ^4.28.5
+    "@typescript-eslint/parser": ^4.28.5
+    eslint: ^7.32.0
+    eslint-config-react-app: ^6.0.0
+    eslint-plugin-react: latest
+    husky: ">=6"
+    lint-staged: ">=10"
+    lodash: ^4.17.21
+    masonic: ^3.4.1
+    mrm: ^3.0.5
+    prettier: 2.3.2
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-query: ^3.19.1
+    react-router-dom: ^5.2.0
+    react-scripts: 4.0.3
+    sb: ^6.3.6
+    typescript: ^4.3.5
+    web-vitals: ^2.1.0
+    webpack-hot-middleware: ^2.25.0
+  dependenciesMeta:
+    open@7.4.2:
+      unplugged: true
+  languageName: unknown
+  linkType: soft
+
 "@hapi/address@npm:2.x.x":
   version: 2.1.4
   resolution: "@hapi/address@npm:2.1.4"
@@ -10055,60 +10109,6 @@ __metadata:
   checksum: 7381a55bdc6951c5c1ab73a8da99d9fa4c0496ce72dba92cd2ac2babe0e3ebde9b81c5bca889498ad95984bc773d713284ca2bb17f1b1e1416e5f6531e39a488
   languageName: node
   linkType: hard
-
-"footron-controls@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "footron-controls@workspace:."
-  dependencies:
-    "@emotion/react": ^11.4.0
-    "@footron/controls-client": ^0.1.14
-    "@material-ui/core": ^4.12.3
-    "@material-ui/icons": ^4.11.2
-    "@mdx-js/react": ^1.6.22
-    "@storybook/addon-actions": ^6.3.6
-    "@storybook/addon-docs": ^6.3.6
-    "@storybook/addon-essentials": ^6.3.6
-    "@storybook/addon-links": ^6.3.6
-    "@storybook/addons": ^6.3.6
-    "@storybook/node-logger": ^6.3.6
-    "@storybook/preset-create-react-app": ^3.2.0
-    "@storybook/react": ^6.3.6
-    "@storybook/theming": ^6.3.6
-    "@testing-library/jest-dom": ^5.14.1
-    "@testing-library/react": ^12.0.0
-    "@testing-library/user-event": ^13.2.1
-    "@types/jest": ^26.0.24
-    "@types/lodash": ^4.14.171
-    "@types/node": ^16.4.8
-    "@types/react": ^17.0.15
-    "@types/react-dom": ^17.0.9
-    "@types/react-router-dom": ^5.1.8
-    "@types/testing-library__jest-dom": ^5.14.1
-    "@typescript-eslint/eslint-plugin": ^4.28.5
-    "@typescript-eslint/parser": ^4.28.5
-    eslint: ^7.32.0
-    eslint-config-react-app: ^6.0.0
-    eslint-plugin-react: latest
-    husky: ">=6"
-    lint-staged: ">=10"
-    lodash: ^4.17.21
-    masonic: ^3.4.1
-    mrm: ^3.0.5
-    prettier: 2.3.2
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    react-query: ^3.19.1
-    react-router-dom: ^5.2.0
-    react-scripts: 4.0.3
-    sb: ^6.3.6
-    typescript: ^4.3.5
-    web-vitals: ^2.1.0
-    webpack-hot-middleware: ^2.25.0
-  dependenciesMeta:
-    open@7.4.2:
-      unplugged: true
-  languageName: unknown
-  linkType: soft
 
 "for-in@npm:^1.0.2":
   version: 1.0.2

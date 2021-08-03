@@ -6,6 +6,7 @@ import {
   Link,
   RouteProps,
   Redirect,
+  useParams,
 } from "react-router-dom";
 import ExplorePage from "./explore/ExplorePage";
 import AuthCodeRoute from "./AuthCodeRoute";
@@ -67,18 +68,15 @@ const ApiDependentRoute = ({
   );
 };
 
-const ControlsRoute = (): JSX.Element => (
-  <Route
-    exact
-    path="/controls/:id"
-    render={({ match }) => {
-      if (!hasControls(match.params.id)) {
-        return <Redirect to="/" />;
-      }
-      return <ControlsPage />;
-    }}
-  />
-);
+const ControlsRoute = (): JSX.Element => {
+  const { id } = useParams<{ id: string }>();
+
+  if (!hasControls(id)) {
+    return <Redirect to="/" />;
+  }
+
+  return <ControlsPage />;
+};
 
 function FootronControlsRoutes(): JSX.Element {
   return (
@@ -90,7 +88,9 @@ function FootronControlsRoutes(): JSX.Element {
         <ApiDependentRoute exact path="/">
           <ExplorePage />
         </ApiDependentRoute>
-        <ControlsRoute />
+        <ApiDependentRoute exact path="/controls/:id">
+          <ControlsRoute />
+        </ApiDependentRoute>
         <Route path="*">
           <ErrorPage
             title={"Error 404"}

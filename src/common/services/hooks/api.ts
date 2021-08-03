@@ -17,7 +17,7 @@ import {
 } from "../api";
 import { Experience } from "../../../types/experience";
 import { Collection } from "../../../types/collection";
-import { ApiError, setAuthCode } from "../apiUtils";
+import { ApiError, getAuthCode, setAuthCode } from "../apiUtils";
 import { ApiStatusResponse } from "../../../types/response";
 
 const RETRY_COUNT = 3;
@@ -70,6 +70,9 @@ export const useCurrentExperience = (
     refetchInterval: 500,
     notifyOnChangeProps: notifyOnChangeProps,
   });
+
+export const useAuthCode = (): UseQueryResult<string, unknown> =>
+  useQuery(["authCode"], getAuthCode);
 
 export const useCurrentExperienceMutation = (): UseMutationResult<
   ApiStatusResponse,

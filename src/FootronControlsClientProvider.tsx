@@ -3,7 +3,9 @@ import {
   ControlsClient,
   ControlsClientProvider,
 } from "@footron/controls-client";
-import { useAuthCode } from "./common/services/hooks/api";
+import { useAuthCode, useCurrentExperience } from "./common/services/hooks/api";
+import controls from "./controls/generated";
+import { hasControls } from "./controls/util";
 
 function FootronControlsClientProvider({
   children,
@@ -13,7 +15,9 @@ function FootronControlsClientProvider({
   const [controlsClient, setControlsClient] = useState<
     ControlsClient | undefined
   >();
+  const [lastApp, setLastApp] = useState<string | undefined>();
   const { data: authCode } = useAuthCode();
+  const { data: currentExperience } = useCurrentExperience();
 
   useEffect(() => {
     if (!authCode) {
@@ -28,6 +32,21 @@ function FootronControlsClientProvider({
       )
     );
   }, [authCode, setControlsClient]);
+
+  useEffect(() => {
+    if (
+      !controlsClient ||
+      !currentExperience ||
+      currentExperience.id === lastApp
+    ) {
+      return;
+    }
+
+    controlsClient.setApp(
+      hasControls(currentExperience.id) ? currentExperience.id : null
+    );
+    setLastApp(currentExperience.id);
+  }, [currentExperience, controlsClient]);
 
   return (
     <ControlsClientProvider client={controlsClient}>

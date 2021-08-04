@@ -30,17 +30,7 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
   const status = useControlsClientStatus(controlsClient);
 
   useEffect(() => {
-    if (
-      !currentExperience ||
-      !controlsClient ||
-      controlsClient.getClientAppId() == id
-    ) {
-      return;
-    }
-
-    controlsClient.setApp(id);
-
-    if (id === currentExperience.id) {
+    if (!currentExperience || id === currentExperience.id) {
       // If ID and currentExperience.id are the same, there's no need to request
       // a new app
       return;

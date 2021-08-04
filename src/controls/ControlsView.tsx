@@ -11,7 +11,6 @@ import {
 import controls from "./generated";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import CenteredSpinner from "../common/CenteredSpinner";
-import LoadingPage from "../common/LoadingPage";
 
 const theme = createTheme({
   palette: {
@@ -52,14 +51,16 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
 
   const ControlsComponent = controls.get(id) as () => JSX.Element;
 
-  return controlsClient ? (
+  return (
     <StaticPrefixProvider prefix={`/static/${id}`}>
       <ThemeProvider theme={theme}>
-        {status == "open" ? <ControlsComponent /> : <CenteredSpinner />}
+        {status == "open" && controlsClient ? (
+          <ControlsComponent />
+        ) : (
+          <CenteredSpinner />
+        )}
       </ThemeProvider>
     </StaticPrefixProvider>
-  ) : (
-    <LoadingPage />
   );
 };
 

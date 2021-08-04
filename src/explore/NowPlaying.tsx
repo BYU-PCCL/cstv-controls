@@ -5,15 +5,7 @@ import { Experience } from "../types/experience";
 import SettingsRemoteIcon from "@material-ui/icons/SettingsRemoteRounded";
 import { Link } from "react-router-dom";
 import { hasControls } from "../controls/util";
-
-const containerStyle = css`
-  display: flex;
-  flex-direction: column;
-
-  a {
-    text-decoration: none;
-  }
-`;
+import { superheadingStyle } from "./styles";
 
 const headerTextContainerStyle = (visible: boolean) => css`
   height: ${visible ? "initial" : "0"};
@@ -23,13 +15,13 @@ const headerTextContainerStyle = (visible: boolean) => css`
   padding: ${visible ? "12px 16px" : "0"};
 `;
 
-const superheadingStyle = css`
-  font-family: "Source Code Pro", monospace;
-  text-transform: uppercase;
-  /* Break this out */
-  color: #39518d;
-  margin: 0;
-  font-size: 18px;
+const containerStyle = css`
+  display: flex;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 const titleStyle = css`

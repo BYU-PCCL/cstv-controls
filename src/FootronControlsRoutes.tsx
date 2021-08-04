@@ -17,6 +17,10 @@ import { isAuthAvailable } from "./common/services/apiUtils";
 import { useDebounce } from "./common/hooks";
 import ControlsPage from "./controls/ControlsPage";
 import { hasControls } from "./controls/util";
+import {
+  useControlsClient,
+  useControlsClientStatus,
+} from "@footron/controls-client";
 
 const ApiDependentRoute = ({
   children,
@@ -29,28 +33,35 @@ const ApiDependentRoute = ({
   // TODO: Decide if we want to create a route for authentication specifically
   //  instead of relying on 401 responses from the API. They're cached though,
   //  which is nice.
-  const { status, error } = useDebounce(
+  const { status: apiStatus, error } = useDebounce(
     useCurrentExperience(["status", "error"]),
     100
   );
+
+  const controlsClient = useControlsClient();
+  const controlsClientStatus = useControlsClientStatus(controlsClient);
 
   return (
     <Route
       {...rest}
       render={() => {
-        if (status == "loading") {
+        if (apiStatus == "loading") {
           return <LoadingPage />;
         }
 
-        if (status == "error") {
-          // TODO: Break this logic out
+        // We don't handle loading state because ControlsView does,
+        // but a "closed" state in the controls client is unrecoverable and
+        // usually means we were deauthed--so we'll need to scan again anyway
+        if (apiStatus == "error" || controlsClientStatus == "closed") {
+          // TODO: Break out (and clean up) this logic
           let title = "An error occurred";
           let description: string | ReactNode =
             "And we don't know what to do :(";
 
           if (
-            error?.response?.status &&
-            [401, 403].includes(error.response.status)
+            (error?.response?.status &&
+              [401, 403].includes(error.response.status)) ||
+            controlsClientStatus == "closed"
           ) {
             const hadAuth = isAuthAvailable();
             title = hadAuth ? "Disconnected" : "Not connected";

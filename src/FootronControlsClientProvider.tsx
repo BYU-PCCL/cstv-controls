@@ -4,7 +4,6 @@ import {
   ControlsClientProvider,
 } from "@footron/controls-client";
 import { useAuthCode, useCurrentExperience } from "./common/services/hooks/api";
-import controls from "./controls/generated";
 import { hasControls } from "./controls/util";
 
 function FootronControlsClientProvider({

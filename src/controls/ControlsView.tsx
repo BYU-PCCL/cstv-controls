@@ -52,7 +52,7 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
   const ControlsComponent = controls.get(id) as () => JSX.Element;
 
   return (
-    <StaticPrefixProvider prefix={`/static/${id}`}>
+    <StaticPrefixProvider prefix={`/static/experiences/${id}`}>
       <ThemeProvider theme={theme}>
         {status == "open" && controlsClient ? (
           <ControlsComponent />

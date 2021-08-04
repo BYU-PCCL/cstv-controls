@@ -16,13 +16,6 @@ Install packages:
 yarn install
 ```
 
-Unplug `open` so Storybook
-works ([Github issue](https://github.com/storybookjs/storybook/issues/13531#issuecomment-751894259)):
-
-```sh
-yarn unplug open -AR
-```
-
 ## Running
 
 Start server:

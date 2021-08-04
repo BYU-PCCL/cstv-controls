@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import { Experience } from "../types/experience";
 import { useCurrentExperienceMutation } from "../common/services/hooks/api";
@@ -11,8 +13,16 @@ import ExperienceList from "./ExperienceList";
 import ExperienceModal from "./ExperienceModal";
 import { hasControls } from "../controls/util";
 import { useHistory } from "react-router-dom";
+import { superheadingStyle } from "./styles";
 
 const MemoizedExperienceList = memo(ExperienceList);
+
+const headerTextContainerStyle = css`
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 32px 16px 0;
+`;
 
 const ExplorePage = (): JSX.Element => {
   const currentExperienceMutation = useCurrentExperienceMutation();
@@ -76,6 +86,9 @@ const ExplorePage = (): JSX.Element => {
         onLaunch={onExperienceLaunched}
       />
       <ExploreCollapsingHeader experience={currentExperience} />
+      <div css={headerTextContainerStyle}>
+        <h2 css={superheadingStyle}>Try Something Else</h2>
+      </div>
       {experiences.length > 0 && (
         <MemoizedExperienceList
           experiences={experiencesWithoutCurrent}

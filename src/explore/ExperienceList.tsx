@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import { Masonry } from "masonic";
 
 const masonicStyle = css`
-  margin: 8px;
+  margin: 16px 8px;
   width: calc(100% - 16px);
 
   @media (min-width: 500px) {

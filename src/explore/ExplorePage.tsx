@@ -89,7 +89,7 @@ const ExplorePage = (): JSX.Element => {
       <div css={headerTextContainerStyle}>
         <h2 css={superheadingStyle}>Try Something Else</h2>
       </div>
-      {experiences.length > 0 && (
+      {experiencesWithoutCurrent.length > 0 && (
         <MemoizedExperienceList
           experiences={experiencesWithoutCurrent}
           onExperienceClick={onExperienceClicked}

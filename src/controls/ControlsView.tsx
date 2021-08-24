@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import React, { useEffect } from "react";
 import {
   useControlsClient,
@@ -22,6 +24,11 @@ const theme = createTheme({
     },
   },
 });
+
+const controlsContainerStyle = css`
+  // Height of more experiences button
+  margin-bottom: 64px;
+`;
 
 const ControlsView = ({ id }: { id: string }): JSX.Element => {
   const { data: currentExperience } = useCurrentExperience();
@@ -55,17 +62,19 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
   // TODO: Make ErrorBoundary fallback less annoying and vague--tell the user
   //  what's going on or jump ahead or something
   return (
-    <StaticPrefixProvider prefix={`/static/experiences/${id}`}>
-      <ThemeProvider theme={theme}>
-        {status == "open" && controlsClient ? (
-          <ErrorBoundary fallback={<CenteredSpinner />}>
-            <ControlsComponent />
-          </ErrorBoundary>
-        ) : (
-          <CenteredSpinner />
-        )}
-      </ThemeProvider>
-    </StaticPrefixProvider>
+    <div css={controlsContainerStyle}>
+      <StaticPrefixProvider prefix={`/static/experiences/${id}`}>
+        <ThemeProvider theme={theme}>
+          {status == "open" && controlsClient ? (
+            <ErrorBoundary fallback={<CenteredSpinner />}>
+              <ControlsComponent />
+            </ErrorBoundary>
+          ) : (
+            <CenteredSpinner />
+          )}
+        </ThemeProvider>
+      </StaticPrefixProvider>
+    </div>
   );
 };
 

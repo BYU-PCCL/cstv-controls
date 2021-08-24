@@ -2104,12 +2104,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@footron/controls-client@npm:^0.1.20":
-  version: 0.1.20
-  resolution: "@footron/controls-client@npm:0.1.20"
+"@footron/controls-client@npm:^0.1.21":
+  version: 0.1.21
+  resolution: "@footron/controls-client@npm:0.1.21"
   dependencies:
     uuid: ^8.3.2
-  checksum: 7a7404c83c958d1fc383d31e34402a088ed1f6fd5690917c20fc75f1b557efe7ab1378229146b5cc3ca63dc54212ab15de250a1c4f1ac7a1064b008d257e48ce
+  checksum: cc13033bb2b2bb991d5fa943fdfaf176ccb4656c965d65926f362006b48b374f44f174ccea7c4d705c8e23abab319b9f32efe2da5c1aba11338045a1cad05786
   languageName: node
   linkType: hard
 
@@ -2118,7 +2118,7 @@ __metadata:
   resolution: "@footron/web@workspace:."
   dependencies:
     "@emotion/react": ^11.4.0
-    "@footron/controls-client": ^0.1.20
+    "@footron/controls-client": ^0.1.21
     "@material-ui/core": ^4.12.3
     "@material-ui/icons": ^4.11.2
     "@mdx-js/react": ^1.6.22

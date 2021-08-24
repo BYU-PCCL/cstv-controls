@@ -56,7 +56,7 @@ const ExperienceList = ({
   return (
     <div css={masonicStyle}>
       <Masonry
-        itemKey={(item) => item.id}
+        itemKey={(item) => item?.id}
         items={experiences}
         columnGutter={8}
         columnWidth={148}

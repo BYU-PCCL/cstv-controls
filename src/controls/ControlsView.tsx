@@ -11,6 +11,7 @@ import {
 import controls from "./generated";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import CenteredSpinner from "../common/CenteredSpinner";
+import { ErrorBoundary } from "react-error-boundary";
 
 const theme = createTheme({
   palette: {
@@ -51,11 +52,15 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
 
   const ControlsComponent = controls.get(id) as () => JSX.Element;
 
+  // TODO: Make ErrorBoundary fallback less annoying and vague--tell the user
+  //  what's going on or jump ahead or something
   return (
     <StaticPrefixProvider prefix={`/static/experiences/${id}`}>
       <ThemeProvider theme={theme}>
         {status == "open" && controlsClient ? (
-          <ControlsComponent />
+          <ErrorBoundary fallback={<CenteredSpinner />}>
+            <ControlsComponent />
+          </ErrorBoundary>
         ) : (
           <CenteredSpinner />
         )}

@@ -21,8 +21,7 @@ const headerContainerStyle = (collapsed: boolean) => css`
 `;
 
 const csLogoStyle = css`
-  width: 90px;
-  height: 90px;
+  height: 40px;
 `;
 
 const logoImageStyle = css`

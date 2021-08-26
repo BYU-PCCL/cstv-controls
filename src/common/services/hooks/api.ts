@@ -15,7 +15,7 @@ import {
   getExperiences,
   setCurrentExperience,
 } from "../api";
-import { Experience } from "../../../types/experience";
+import { CurrentExperience, Experience } from "../../../types/experience";
 import { Collection } from "../../../types/collection";
 import { ApiError, getAuthCode, setAuthCode } from "../apiUtils";
 import { ApiStatusResponse } from "../../../types/response";
@@ -65,7 +65,7 @@ export const useCurrentExperience = (
     "data",
     "error",
   ]
-): UseQueryResult<Experience, ApiError> =>
+): UseQueryResult<CurrentExperience, ApiError> =>
   useQueryRetryUnless400(["current"], getCurrentExperience, {
     refetchInterval: 500,
     notifyOnChangeProps: notifyOnChangeProps,

@@ -65,6 +65,8 @@ const ExplorePage = (): JSX.Element => {
     setExperiences(Object.values(experiencesMap));
   }, [experiencesMap]);
 
+  const experienceVisible = currentExperience && !currentExperience?.unlisted;
+
   return (
     <PageWidth>
       <ExperienceModal
@@ -74,7 +76,9 @@ const ExplorePage = (): JSX.Element => {
       />
       <ExploreCollapsingHeader experience={currentExperience} />
       <div css={headerTextContainerStyle}>
-        <h2 css={superheadingStyle}>Try Something Else</h2>
+        <h2 css={superheadingStyle}>
+          {experienceVisible ? "Try Something Else" : "Explore"}
+        </h2>
       </div>
       {experiences.length > 0 && (
         <MemoizedExperienceList

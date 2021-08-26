@@ -2,11 +2,11 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
 import ExploreCollapsingHeaderComponent from "./ExploreCollapsingHeader";
-import { Experience } from "../types/experience";
+import { CurrentExperience } from "../types/experience";
 import PageWidth from "../common/PageWidth";
 import { MemoryRouter } from "react-router-dom";
 
-const testExperience: Experience = {
+const testExperience: CurrentExperience = {
   colors: {
     primary: "",
     secondaryLight: "",
@@ -19,6 +19,7 @@ const testExperience: Experience = {
   id: "test",
   title: "Real-time Tracking by Detection of Human Motion",
   lastUpdate: 500,
+  lock: false,
 };
 
 export default {

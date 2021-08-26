@@ -9,11 +9,13 @@ export interface Experience {
   artist?: string;
   collection?: string;
   lifetime?: number;
+  unlisted?: boolean;
   colors: Colors;
   thumbnails: Thumbnails;
 }
 
 export interface CurrentExperience extends Experience {
   // Unix timestamp
-  endTime: number;
+  endTime?: number;
+  lock: boolean | number;
 }

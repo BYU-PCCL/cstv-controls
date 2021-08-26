@@ -2,19 +2,21 @@
 import React from "react";
 import NowPlaying from "./NowPlaying";
 import Header from "../common/Header";
-import { Experience } from "../types/experience";
+import { CurrentExperience } from "../types/experience";
 
 const ExploreCollapsingHeader = ({
   collapsed = false,
   experience,
 }: {
   collapsed?: boolean;
-  experience?: Experience;
+  experience?: CurrentExperience;
 }): JSX.Element => {
   return (
     <div>
       <Header collapsed={collapsed} />
-      {experience && <NowPlaying fixed={collapsed} experience={experience} />}
+      {experience && !experience?.unlisted && (
+        <NowPlaying fixed={collapsed} experience={experience} />
+      )}
     </div>
   );
 };

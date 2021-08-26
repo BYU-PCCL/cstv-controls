@@ -29,9 +29,6 @@ const ExplorePage = (): JSX.Element => {
   const { data: experiencesMap } = useExperiences();
   const { data: currentExperience } = useCurrentExperience();
   const [experiences, setExperiences] = useState<Experience[]>([]);
-  const [experiencesWithoutCurrent, setExperiencesWithoutCurrent] = useState<
-    Experience[]
-  >([]);
 
   const [dialogExperience, setDialogExperience] = useState<
     Experience | undefined
@@ -43,16 +40,6 @@ const ExplorePage = (): JSX.Element => {
     },
     [experiences, setDialogExperience]
   );
-
-  useEffect(() => {
-    let experiencesWithout = [...experiences];
-    if (currentExperience) {
-      experiencesWithout = experiencesWithout.filter(
-        (experience) => experience.id !== currentExperience.id
-      );
-    }
-    setExperiencesWithoutCurrent(experiencesWithout);
-  }, [experiences, currentExperience]);
 
   const history = useHistory();
 
@@ -89,9 +76,9 @@ const ExplorePage = (): JSX.Element => {
       <div css={headerTextContainerStyle}>
         <h2 css={superheadingStyle}>Try Something Else</h2>
       </div>
-      {experiencesWithoutCurrent.length > 0 && (
+      {experiences.length > 0 && (
         <MemoizedExperienceList
-          experiences={experiencesWithoutCurrent}
+          experiences={experiences}
           onExperienceClick={onExperienceClicked}
         />
       )}

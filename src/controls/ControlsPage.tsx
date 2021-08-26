@@ -4,7 +4,10 @@ import React from "react";
 import PageWidth from "../common/PageWidth";
 import ControlsHeader from "./ControlsHeader";
 import MoreExperiencesButton from "./MoreExperiencesButton";
-import { useExperience } from "../common/services/hooks/api";
+import {
+  useCurrentExperience,
+  useExperience,
+} from "../common/services/hooks/api";
 import { useParams } from "react-router-dom";
 import LoadingPage from "../common/LoadingPage";
 import ControlsView from "./ControlsView";
@@ -30,14 +33,22 @@ const fixedFooterStyle = css`
 const ControlsPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
   const experience = useExperience(id);
+  // It feels pretty hacky to ask for both the experience and the current
+  // experience, but those two aren't always the same--we could be trying to
+  // launch a new experience, for example
+  const { data: currentExperience } = useCurrentExperience();
+  const isCurrentExperience =
+    experience && currentExperience && experience.id === currentExperience.id;
 
   return experience ? (
     <PageWidth>
       <ControlsHeader title={experience.title} />
       <ControlsView id={id} />
-      <div css={fixedFooterStyle}>
-        <MoreExperiencesButton />
-      </div>
+      {(!isCurrentExperience || currentExperience?.lock !== true) && (
+        <div css={fixedFooterStyle}>
+          <MoreExperiencesButton />
+        </div>
+      )}
     </PageWidth>
   ) : (
     <LoadingPage />

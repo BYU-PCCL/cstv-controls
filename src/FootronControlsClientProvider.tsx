@@ -41,9 +41,11 @@ function FootronControlsClientProvider({
       return;
     }
 
-    controlsClient.setApp(
-      hasControls(currentExperience.id) ? currentExperience.id : null
-    );
+    if (controlsClient.getClientAppId() !== currentExperience.id) {
+      controlsClient.setApp(
+        hasControls(currentExperience.id) ? currentExperience.id : null
+      );
+    }
     setLastApp(currentExperience.id);
   }, [currentExperience, controlsClient]);
 

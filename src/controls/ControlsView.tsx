@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useControlsClient,
   StaticPrefixProvider,
@@ -14,6 +14,7 @@ import controls from "./generated";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import CenteredSpinner from "../common/CenteredSpinner";
 import { ErrorBoundary } from "react-error-boundary";
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -33,21 +34,26 @@ const controlsContainerStyle = css`
 const ControlsView = ({ id }: { id: string }): JSX.Element => {
   const { data: currentExperience } = useCurrentExperience();
   const { mutate: mutateCurrentExperience } = useCurrentExperienceMutation();
+  const [attemptedInitialAppUpdate, setAttemptedInitialAppUpdate] =
+    useState<boolean>(false);
   const controlsClient = useControlsClient();
   const status = useControlsClientStatus(controlsClient);
+  const history = useHistory();
 
   useEffect(() => {
-    if (!currentExperience || id === currentExperience.id) {
-      // If ID and currentExperience.id are the same, there's no need to request
-      // a new app
+    if (!controlsClient || attemptedInitialAppUpdate) {
       return;
     }
 
-    mutateCurrentExperience(id);
-  }, [id, controlsClient, currentExperience, mutateCurrentExperience]);
+    if (controlsClient.getClientAppId() !== id) {
+      controlsClient.setApp(id);
+    }
+
+    setAttemptedInitialAppUpdate(true);
+  }, [controlsClient, attemptedInitialAppUpdate]);
 
   useEffect(() => {
-    if (!controlsClient) {
+    if (!controlsClient || !attemptedInitialAppUpdate) {
       return;
     }
 
@@ -55,7 +61,39 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
     return () => {
       controlsClient.pause();
     };
-  }, [controlsClient]);
+  }, [controlsClient, attemptedInitialAppUpdate]);
+
+  useEffect(() => {
+    if (
+      !currentExperience ||
+      id === currentExperience.id ||
+      !attemptedInitialAppUpdate
+    ) {
+      // If ID and currentExperience.id are the same, there's no need to request
+      // a new app
+      return;
+    }
+
+    // If controls client connection ID is current id, then we've already been
+    // connected, which means that something else changed the ID. So we redirect
+    // home.
+    if (
+      controlsClient &&
+      (controlsClient.getClientAppId() !== id ||
+        controlsClient.getConnectionAppId() === id)
+    ) {
+      history.push("/");
+      return;
+    }
+
+    mutateCurrentExperience(id);
+  }, [
+    id,
+    controlsClient,
+    currentExperience,
+    mutateCurrentExperience,
+    attemptedInitialAppUpdate,
+  ]);
 
   const ControlsComponent = controls.get(id) as () => JSX.Element;
 

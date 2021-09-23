@@ -122,11 +122,19 @@ const fixedFooterStyle = css`
   }
 `;
 
-const folderSubHeader = css`
+const folderTitle = css`
+  font-family: "Montserrat", sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0px 16px 12px;
+  color: #001e4c;
+`;
+
+const folderDescription = css`
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: bold;
-  margin: 8px 16px 4px 16px;
+  margin: 0px 16px 32px;
   color: #001e4c;
 `;
 
@@ -141,9 +149,9 @@ const ExploreFolderPage = (): JSX.Element => {
     <PageWidth>
       <div>
         <Header collapsed={false} />
-        <div css={folderSubHeader}>
-          <h1>{FolderTitle}</h1>
-          <p>{FolderDescription}</p>
+        <div>
+          <h1 css={folderTitle}>{FolderTitle}</h1>
+          <p css={folderDescription}>{FolderDescription}</p>
         </div>
 
         {testExperienceList.length > 0 && (

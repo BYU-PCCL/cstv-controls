@@ -4,6 +4,7 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { Experience } from "../types/experience";
 import { useCurrentExperienceMutation } from "../common/services/hooks/api";
 import {
+  useCollections,
   useCurrentExperience,
   useExperiences,
 } from "../common/services/hooks/api";
@@ -11,11 +12,13 @@ import PageWidth from "../common/PageWidth";
 import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
 import ExperienceList from "./ExperienceList";
 import ExperienceModal from "./ExperienceModal";
+import ExperienceFolder from "./ExperienceFolder";
 import { hasControls } from "../controls/util";
 import { useHistory } from "react-router-dom";
 import { superheadingStyle } from "./styles";
 
 const MemoizedExperienceList = memo(ExperienceList);
+const MemoizedCollectionList = memo(ExperienceFolder);
 
 const headerTextContainerStyle = css`
   position: relative;
@@ -26,6 +29,7 @@ const headerTextContainerStyle = css`
 
 const ExplorePage = (): JSX.Element => {
   const currentExperienceMutation = useCurrentExperienceMutation();
+  const { data: collectionsMap } = useCollections();
   const { data: experiencesMap } = useExperiences();
   const { data: currentExperience } = useCurrentExperience();
   const [experiences, setExperiences] = useState<Experience[]>([]);

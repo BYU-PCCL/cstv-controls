@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo } from "react";
 import { Tag } from "../types/tag";
+import { Collection } from "../types/collection";
 import { css } from "@emotion/react";
 
 const folderStyle = (backgroundColor: string) => css`
@@ -23,7 +24,6 @@ const folderStyle = (backgroundColor: string) => css`
 const thumbnailStyle = css`
   position: relative;
   width: 100%;
-
 `;
 
 const textStyle = (color: string) => css`
@@ -35,51 +35,53 @@ const textStyle = (color: string) => css`
   padding: 16px;
 `;
 
-const foreground = (color: string) => css `
+const foreground = (color: string) => css`
   position: absolute;
   height: 100%;
   width: 100%;
   background-color: ${color};
   opacity: 70%;
-
 `;
 
 const ExperienceFolders = ({
-                            folders,
-                            onExperienceClick,
-                        }: {
-    folders: Tag[];
-    onExperienceClick: (folder: Tag) => void;
+  folders,
+  onFolderClick,
+}: {
+  folders: Collection[];
+  onFolderClick: (folder: Collection) => void;
 }): JSX.Element => {
-    return (
-        <div>
-            {
-                folders.map((folder) => {
-                    return  <ExperienceFolder key={folder.id} folder={folder} onClick={onExperienceClick} />
-                })
-
-            }
-        </div>
-    );
+  return (
+    <div>
+      {folders.map((folder) => {
+        return (
+          <ExperienceFolder
+            key={folder.id}
+            folder={folder}
+            onClick={onFolderClick}
+          />
+        );
+      })}
+    </div>
+  );
 };
 
 const ExperienceFolder = memo(
-    ({
-         folder,
-         onClick,
-     }: {
-        folder: Tag;
-        onClick: (folder: Tag) => void;
-    }) => {
-        const { description, title } = folder;
-        return (
-            <div css={folderStyle("#737311")} onClick={() => onClick(folder)}>
-                <img css={thumbnailStyle} src={ "https://via.placeholder.com/298x95"} />
-                <div css={foreground( "#737311")}></div>
-                <p css={textStyle("#ECF4E3")}>{title}</p>
-            </div>
-        );
-    }
+  ({
+    folder,
+    onClick,
+  }: {
+    folder: Collection;
+    onClick: (folder: Collection) => void;
+  }) => {
+    const { description, title } = folder;
+    return (
+      <div css={folderStyle("#737311")} onClick={() => onClick(folder)}>
+        <img css={thumbnailStyle} src={"https://via.placeholder.com/298x95"} />
+        <div css={foreground("#737311")}></div>
+        <p css={textStyle("#ECF4E3")}>{title}</p>
+      </div>
+    );
+  }
 );
 
 ExperienceFolder.displayName = "ExperienceFolders";

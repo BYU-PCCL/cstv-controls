@@ -1,6 +1,6 @@
-export interface Collection {
+export interface Folder {
   id: string;
   title: string;
-  artist?: string;
+  tags: string[];
   description?: string;
 }

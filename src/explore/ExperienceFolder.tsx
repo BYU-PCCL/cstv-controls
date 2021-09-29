@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo } from "react";
 import { Tag } from "../types/tag";
-import { Collection } from "../types/collection";
+import { Folder } from "../types/folder";
 import { css } from "@emotion/react";
 
 const folderStyle = (backgroundColor: string) => css`
@@ -47,8 +47,8 @@ const ExperienceFolders = ({
   folders,
   onFolderClick,
 }: {
-  folders: Collection[];
-  onFolderClick: (folder: Collection) => void;
+  folders: Folder[];
+  onFolderClick: (folder: Folder) => void;
 }): JSX.Element => {
   return (
     <div>
@@ -70,8 +70,8 @@ const ExperienceFolder = memo(
     folder,
     onClick,
   }: {
-    folder: Collection;
-    onClick: (folder: Collection) => void;
+    folder: Folder;
+    onClick: (folder: Folder) => void;
   }) => {
     const { description, title } = folder;
     return (

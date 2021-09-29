@@ -4,7 +4,6 @@ import React, { memo, useCallback, useEffect, useState } from "react";
 import { Experience } from "../types/experience";
 import { useCurrentExperienceMutation } from "../common/services/hooks/api";
 import {
-  useCollections,
   useCurrentExperience,
   useExperiences,
 } from "../common/services/hooks/api";
@@ -29,7 +28,6 @@ const headerTextContainerStyle = css`
 
 const ExplorePage = (): JSX.Element => {
   const currentExperienceMutation = useCurrentExperienceMutation();
-  const { data: collectionsMap } = useCollections();
   const { data: experiencesMap } = useExperiences();
   const { data: currentExperience } = useCurrentExperience();
   const [experiences, setExperiences] = useState<Experience[]>([]);

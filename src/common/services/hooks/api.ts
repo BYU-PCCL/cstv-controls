@@ -10,13 +10,13 @@ import {
   UseQueryResult,
 } from "react-query";
 import {
-  getCollections,
+  getFolders,
   getCurrentExperience,
   getExperiences,
   setCurrentExperience,
 } from "../api";
 import { CurrentExperience, Experience } from "../../../types/experience";
-import { Collection } from "../../../types/collection";
+import { Folder } from "../../../types/folder";
 import { ApiError, getAuthCode, setAuthCode } from "../apiUtils";
 import { ApiStatusResponse } from "../../../types/response";
 
@@ -54,10 +54,10 @@ export const useExperience = (id: string): Experience | undefined => {
   return experiencesMap[id];
 };
 
-export const useCollections = (): UseQueryResult<
-  Record<string, Collection>,
+export const useFolders = (): UseQueryResult<
+  Record<string, Folder>,
   ApiError
-> => useQueryRetryUnless400(["collections"], getCollections);
+> => useQueryRetryUnless400(["folder"], getFolders);
 
 export const useCurrentExperience = (
   notifyOnChangeProps: Array<keyof InfiniteQueryObserverResult> | "tracked" = [

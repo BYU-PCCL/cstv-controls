@@ -6,34 +6,34 @@ import { Experience } from "../types/experience";
 import PageWidth from "../common/PageWidth";
 
 const testExperienceList: Experience[] = [
-  {
-    id: "test2",
-    title: "Style Transfer",
-    lastUpdate: 500,
-    thumbnails: {
-      thumb: "https://via.placeholder.com/148x148",
-      wide: "https://via.placeholder.com/300x180",
-    },
-    colors: {
-      primary: "#737311",
-      secondaryDark: "#748C31",
-      secondaryLight: "#ECF4E3",
-    },
-  },
-  {
-    id: "test",
-    title: "Animation video from cool students",
-    lastUpdate: 500,
-    thumbnails: {
-      thumb: "https://via.placeholder.com/148x148",
-      wide: "https://via.placeholder.com/300x180",
-    },
-    colors: {
-      primary: "#812D1B",
-      secondaryDark: "#9C6428",
-      secondaryLight: "#FFFFF1",
-    },
-  },
+  // {
+  //   id: "test2",
+  //   title: "Style Transfer",
+  //   lastUpdate: 500,
+  //   thumbnails: {
+  //     thumb: "https://via.placeholder.com/148x148",
+  //     wide: "https://via.placeholder.com/300x180",
+  //   },
+  //   colors: {
+  //     primary: "#737311",
+  //     secondaryDark: "#748C31",
+  //     secondaryLight: "#ECF4E3",
+  //   },
+  // },
+  // {
+  //   id: "test",
+  //   title: "Animation video from cool students",
+  //   lastUpdate: 500,
+  //   thumbnails: {
+  //     thumb: "https://via.placeholder.com/148x148",
+  //     wide: "https://via.placeholder.com/300x180",
+  //   },
+  //   colors: {
+  //     primary: "#812D1B",
+  //     secondaryDark: "#9C6428",
+  //     secondaryLight: "#FFFFF1",
+  //   },
+  // },
   // {
   //   id: "test",
   //   title: "Grendel",

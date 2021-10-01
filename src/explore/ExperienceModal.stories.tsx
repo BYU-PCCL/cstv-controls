@@ -6,6 +6,8 @@ import { Experience } from "../types/experience";
 import PageWidth from "../common/PageWidth";
 
 const TestExperience: Experience = {
+  folders: [],
+  tags: [],
   id: "test",
   title: "Style Transfer",
   description: "Ever wondered what you'd look like in a van goh painting?",

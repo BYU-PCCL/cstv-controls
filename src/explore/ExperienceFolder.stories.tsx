@@ -4,23 +4,9 @@ import React from "react";
 import ExperienceFoldersComponent from "./ExperienceFolder";
 import { Tag } from "../types/tag";
 import PageWidth from "../common/PageWidth";
+import { Folder } from "../types/folder";
 
-const testExperienceFolders: Tag[] = [
-  {
-    id: "test",
-    experiences: ["Grendel", "Taijitu"],
-    title: "Animation Videos",
-    description: "A folder of videos from animation students",
-    featured: "Grendel",
-  },
-  {
-    id: "test",
-    experiences: ["Grendel", "Taijitu"],
-    title: "Animation Videos",
-    description: "A folder of videos from animation students",
-    featured: "Grendel",
-  },
-];
+const testExperienceFolders: Folder[] = [];
 
 export default {
   title: "Explore/ExperienceFolders",

@@ -59,6 +59,16 @@ export const useFolders = (): UseQueryResult<
   ApiError
 > => useQueryRetryUnless400(["folder"], getFolders);
 
+export const useFolder = (id: string): Folder | undefined => {
+  const { data: foldersMap } = useFolders();
+
+  if (foldersMap == null || !(id in foldersMap)) {
+    return undefined;
+  }
+
+  return foldersMap[id];
+};
+
 export const useCurrentExperience = (
   notifyOnChangeProps: Array<keyof InfiniteQueryObserverResult> | "tracked" = [
     "data",

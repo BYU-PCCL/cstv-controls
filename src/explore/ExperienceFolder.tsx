@@ -24,6 +24,7 @@ const folderStyle = (backgroundColor: string) => css`
 const thumbnailStyle = css`
   position: relative;
   width: 100%;
+  height: 100px;
 `;
 
 const textStyle = (color: string) => css`
@@ -73,12 +74,12 @@ const ExperienceFolder = memo(
     folder: Folder;
     onClick: (folder: Folder) => void;
   }) => {
-    const { description, title } = folder;
+    const { colors, thumbnails, title } = folder;
     return (
-      <div css={folderStyle("#737311")} onClick={() => onClick(folder)}>
-        <img css={thumbnailStyle} src={"https://via.placeholder.com/298x95"} />
-        <div css={foreground("#737311")}></div>
-        <p css={textStyle("#ECF4E3")}>{title}</p>
+      <div css={folderStyle(colors.primary)} onClick={() => onClick(folder)}>
+        <img css={thumbnailStyle} src={thumbnails.wide} />
+        <div css={foreground(colors.primary)}></div>
+        <p css={textStyle(colors.secondaryLight)}>{title}</p>
       </div>
     );
   }

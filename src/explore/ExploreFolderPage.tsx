@@ -118,8 +118,8 @@ const ExploreFolderPage = (): JSX.Element => {
             onExperienceClick={onExperienceClicked}
           />
         )}
+        <div css={footerPadding} />
         <div css={fixedFooterStyle}>
-          <div css={footerPadding} />
           <MoreExperiencesButton />
         </div>
       </div>

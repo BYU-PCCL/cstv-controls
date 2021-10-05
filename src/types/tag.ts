@@ -3,5 +3,4 @@ export interface Tag {
   experiences: string[];
   title: string;
   description: string;
-  featured: string;
 }

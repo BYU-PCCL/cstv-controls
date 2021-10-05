@@ -9,6 +9,7 @@ import {
   useParams,
 } from "react-router-dom";
 import ExplorePage from "./explore/ExplorePage";
+import ExploreFolderPage from "./explore/ExploreFolderPage";
 import AuthCodeRoute from "./AuthCodeRoute";
 import ErrorPage from "./common/ErrorPage";
 import { useCurrentExperience } from "./common/services/hooks/api";
@@ -98,6 +99,9 @@ function FootronControlsRoutes(): JSX.Element {
         </Route>
         <ApiDependentRoute exact path="/">
           <ExplorePage />
+        </ApiDependentRoute>
+        <ApiDependentRoute exact path="/explore/:id">
+          <ExploreFolderPage />
         </ApiDependentRoute>
         <ApiDependentRoute exact path="/controls/:id">
           <ControlsRoute />

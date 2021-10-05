@@ -7,6 +7,8 @@ import PageWidth from "../common/PageWidth";
 import { MemoryRouter } from "react-router-dom";
 
 const testExperience: CurrentExperience = {
+  folders: [],
+  tags: [],
   colors: {
     primary: "",
     secondaryLight: "",

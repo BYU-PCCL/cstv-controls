@@ -1,21 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { Experience } from "../types/experience";
-import { useCurrentExperienceMutation } from "../common/services/hooks/api";
-import {
-  useCurrentExperience,
-  useExperiences,
-} from "../common/services/hooks/api";
+import { useFolders } from "../common/services/hooks/api";
+import { useCurrentExperience } from "../common/services/hooks/api";
 import PageWidth from "../common/PageWidth";
 import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
-import ExperienceList from "./ExperienceList";
-import ExperienceModal from "./ExperienceModal";
-import { hasControls } from "../controls/util";
+import ExperienceFolder from "./ExperienceFolder";
 import { useHistory } from "react-router-dom";
 import { superheadingStyle } from "./styles";
+import { Folder } from "../types/folder";
 
-const MemoizedExperienceList = memo(ExperienceList);
+const MemoizedFolderList = memo(ExperienceFolder);
 
 const headerTextContainerStyle = css`
   position: relative;
@@ -25,66 +20,37 @@ const headerTextContainerStyle = css`
 `;
 
 const ExplorePage = (): JSX.Element => {
-  const currentExperienceMutation = useCurrentExperienceMutation();
-  const { data: experiencesMap } = useExperiences();
+  const { data: foldersMap } = useFolders();
   const { data: currentExperience } = useCurrentExperience();
-  const [experiences, setExperiences] = useState<Experience[]>([]);
-
-  const [dialogExperience, setDialogExperience] = useState<
-    Experience | undefined
-  >();
-
-  const onExperienceClicked = useCallback(
-    (experience: Experience) => {
-      setDialogExperience(experience);
-    },
-    [experiences, setDialogExperience]
-  );
-
+  const [folders, setFolders] = useState<Folder[]>([]);
   const history = useHistory();
 
-  const onExperienceLaunched = useCallback(
-    (experience: Experience) => {
-      currentExperienceMutation.mutate(experience.id);
-      onDialogClosed();
-      if (hasControls(experience.id)) {
-        history.push(`/controls/${experience.id}`);
-      }
+  const onFolderClicked = useCallback(
+    (folder: Folder) => {
+      history.push(`/explore/${folder.id}`);
     },
-    [experiences, setDialogExperience]
+    [history, folders]
   );
 
-  const onDialogClosed = () => {
-    setDialogExperience(undefined);
-  };
-
   useEffect(() => {
-    if (!experiencesMap) {
+    if (!foldersMap) {
       return;
     }
-    setExperiences(Object.values(experiencesMap));
-  }, [experiencesMap]);
+    setFolders(Object.values(foldersMap));
+  }, [foldersMap]);
 
   const experienceVisible = currentExperience && !currentExperience?.unlisted;
 
   return (
     <PageWidth>
-      <ExperienceModal
-        experience={dialogExperience}
-        onClose={onDialogClosed}
-        onLaunch={onExperienceLaunched}
-      />
       <ExploreCollapsingHeader experience={currentExperience} />
       <div css={headerTextContainerStyle}>
         <h2 css={superheadingStyle}>
           {experienceVisible ? "Try Something Else" : "Explore"}
         </h2>
       </div>
-      {experiences.length > 0 && (
-        <MemoizedExperienceList
-          experiences={experiences}
-          onExperienceClick={onExperienceClicked}
-        />
+      {folders.length > 0 && (
+        <MemoizedFolderList folders={folders} onFolderClick={onFolderClicked} />
       )}
     </PageWidth>
   );

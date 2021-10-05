@@ -7,7 +7,8 @@ export interface Experience {
   lastUpdate: number;
   description?: string;
   artist?: string;
-  collection?: string;
+  folders: string[];
+  tags: string[];
   lifetime?: number;
   unlisted?: boolean;
   colors: Colors;

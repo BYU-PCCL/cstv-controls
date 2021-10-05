@@ -21,7 +21,7 @@ const headerTextContainerStyle = css`
 
 const ExplorePage = (): JSX.Element => {
   const { data: foldersMap } = useFolders();
-  const { data: currentExp } = useCurrentExperience();
+  const { data: currentExperience } = useCurrentExperience();
   const [folders, setFolders] = useState<Folder[]>([]);
 
   const onFolderClicked = useCallback(
@@ -40,11 +40,11 @@ const ExplorePage = (): JSX.Element => {
     setFolders(Object.values(foldersMap));
   }, [foldersMap]);
 
-  const experienceVisible = currentExp && !currentExp?.unlisted;
+  const experienceVisible = currentExperience && !currentExperience?.unlisted;
 
   return (
     <PageWidth>
-      <ExploreCollapsingHeader experience={currentExp} />
+      <ExploreCollapsingHeader experience={currentExperience} />
       <div css={headerTextContainerStyle}>
         <h2 css={superheadingStyle}>
           {experienceVisible ? "Try Something Else" : "Explore"}

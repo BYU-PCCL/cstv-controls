@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { Folder } from "../types/folder";
 import { css } from "@emotion/react";
 
-const folderStyle = (backgroundColor: string) => css`
+const folderStyle = css`
   border-radius: 6px;
   overflow: hidden;
   display: flex;
@@ -35,7 +35,7 @@ const textStyle = (color: string) => css`
   padding: 16px;
 `;
 
-const foreground = (color: string) => css`
+const foregroundStyle = (color: string) => css`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -75,9 +75,9 @@ const ExperienceFolder = memo(
   }) => {
     const { colors, thumbnails, title } = folder;
     return (
-      <div css={folderStyle(colors.primary)} onClick={() => onClick(folder)}>
-        <img css={thumbnailStyle} src={thumbnails.wide} />
-        <div css={foreground(colors.primary)}></div>
+      <div css={folderStyle} onClick={() => onClick(folder)}>
+        <img css={thumbnailStyle} src={thumbnails.wide} alt="" />
+        <div css={foregroundStyle(colors.primary)} />
         <p css={textStyle(colors.secondaryLight)}>{title}</p>
       </div>
     );

@@ -1,26 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { memo, useCallback, useEffect, useState } from "react";
-import { Experience } from "../types/experience";
-import {
-  useCurrentExperienceMutation,
-  useFolders,
-} from "../common/services/hooks/api";
-import {
-  useCurrentExperience,
-  useExperiences,
-} from "../common/services/hooks/api";
+import { useFolders } from "../common/services/hooks/api";
+import { useCurrentExperience } from "../common/services/hooks/api";
 import PageWidth from "../common/PageWidth";
 import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
-import ExperienceList from "./ExperienceList";
-import ExperienceModal from "./ExperienceModal";
 import ExperienceFolder from "./ExperienceFolder";
-import { hasControls } from "../controls/util";
 import { useHistory } from "react-router-dom";
 import { superheadingStyle } from "./styles";
 import { Folder } from "../types/folder";
 
-const MemoizedExperienceList = memo(ExperienceList);
 const MemoizedFolderList = memo(ExperienceFolder);
 
 const headerTextContainerStyle = css`
@@ -31,14 +20,9 @@ const headerTextContainerStyle = css`
 `;
 
 const ExplorePage = (): JSX.Element => {
-  const currentExperienceMutation = useCurrentExperienceMutation();
   const { data: foldersMap } = useFolders();
   const { data: currentExp } = useCurrentExperience();
   const [folders, setFolders] = useState<Folder[]>([]);
-
-  const [dialogExperience, setDialogExperience] = useState<
-    Experience | undefined
-  >();
 
   const onFolderClicked = useCallback(
     (folder: Folder) => {

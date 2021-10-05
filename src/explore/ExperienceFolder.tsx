@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo } from "react";
-import { Tag } from "../types/tag";
 import { Folder } from "../types/folder";
 import { css } from "@emotion/react";
 

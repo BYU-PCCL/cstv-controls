@@ -7,11 +7,7 @@ import ExperienceList from "./ExperienceList";
 import { Experience } from "../types/experience";
 import MoreExperiencesButton from "../controls/MoreExperiencesButton";
 import { css } from "@emotion/react";
-import {
-  useExperiences,
-  useFolder,
-  useFolders,
-} from "../common/services/hooks/api";
+import { useExperiences, useFolder } from "../common/services/hooks/api";
 import { hasControls } from "../controls/util";
 import { useCurrentExperienceMutation } from "../common/services/hooks/api";
 import ExperienceModal from "./ExperienceModal";
@@ -34,29 +30,34 @@ const fixedFooterStyle = css`
   }
 `;
 
+const folderContainerStyle = css`
+  margin: 12px 16px 48px;
+  color: #001e4c;
+`;
+
 const folderTitle = css`
   font-family: "Montserrat", sans-serif;
   font-size: 26px;
   font-weight: bold;
-  margin: 0px 16px 12px;
-  color: #001e4c;
+  margin-top: 0;
+`;
+
+const footerPadding = css`
+  height: 64px;
 `;
 
 const folderDescription = css`
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 0px 16px 32px;
-  color: #001e4c;
+  margin-bottom: 0;
 `;
 
 const MemoizedExperienceList = memo(ExperienceList);
 
 const ExploreFolderPage = (): JSX.Element => {
+  const { id } = useParams<{ id: string }>();
   const currentExperienceMutation = useCurrentExperienceMutation();
-  const { data: foldersMap } = useFolders();
   const { data: experiencesMap } = useExperiences();
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const folder = useFolder(id);
 
   const [dialogExperience, setDialogExperience] = useState<
     Experience | undefined
@@ -85,9 +86,6 @@ const ExploreFolderPage = (): JSX.Element => {
   const onDialogClosed = () => {
     setDialogExperience(undefined);
   };
-
-  const { id } = useParams<{ id: string }>();
-  const folder = useFolder(id);
 
   useEffect(() => {
     if (!experiencesMap || !id) {

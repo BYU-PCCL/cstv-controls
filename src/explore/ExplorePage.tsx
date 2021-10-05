@@ -23,15 +23,14 @@ const ExplorePage = (): JSX.Element => {
   const { data: foldersMap } = useFolders();
   const { data: currentExperience } = useCurrentExperience();
   const [folders, setFolders] = useState<Folder[]>([]);
+  const history = useHistory();
 
   const onFolderClicked = useCallback(
     (folder: Folder) => {
       history.push(`/explore/${folder.id}`);
     },
-    [folders]
+    [history, folders]
   );
-
-  const history = useHistory();
 
   useEffect(() => {
     if (!foldersMap) {

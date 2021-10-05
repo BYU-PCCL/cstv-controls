@@ -100,9 +100,6 @@ function FootronControlsRoutes(): JSX.Element {
         <ApiDependentRoute exact path="/">
           <ExplorePage />
         </ApiDependentRoute>
-        <ApiDependentRoute exact path="/:id">
-          <ExplorePage />
-        </ApiDependentRoute>
         <ApiDependentRoute exact path="/controls/:id">
           <ControlsRoute />
         </ApiDependentRoute>

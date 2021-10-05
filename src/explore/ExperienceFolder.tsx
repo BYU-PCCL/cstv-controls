@@ -13,7 +13,6 @@ const folderStyle = css`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  margin: 10px;
   &:active {
     transform: scale(98%);
     -webkit-transform: scale(0.98, 0.98);
@@ -23,13 +22,13 @@ const folderStyle = css`
 const thumbnailStyle = css`
   position: relative;
   width: 100%;
-  height: 100px;
+  height: 108px;
+  object-fit: cover;
 `;
 
 const textStyle = (color: string) => css`
   position: absolute;
   font-family: "Montserrat", sans-serif;
-  width: calc(100% - 32px);
   font-size: 26px;
   color: ${color};
   padding: 16px;
@@ -43,6 +42,19 @@ const foregroundStyle = (color: string) => css`
   opacity: 70%;
 `;
 
+const foldersContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  margin: 16px 8px;
+  width: calc(100% - 16px);
+  gap: 8px;
+
+  @media (min-width: 500px) {
+    margin: 16px;
+    width: calc(100% - 32px);
+  }
+`;
+
 const ExperienceFolders = ({
   folders,
   onFolderClick,
@@ -51,7 +63,7 @@ const ExperienceFolders = ({
   onFolderClick: (folder: Folder) => void;
 }): JSX.Element => {
   return (
-    <div>
+    <div css={foldersContainerStyle}>
       {folders.map((folder) => {
         return (
           <ExperienceFolder

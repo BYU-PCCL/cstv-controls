@@ -107,7 +107,7 @@ const ExploreFolderPage = (): JSX.Element => {
       <div>
         <Header collapsed={false} />
         {folder && (
-          <div>
+          <div css={folderContainerStyle}>
             <h1 css={folderTitle}>{folder.title}</h1>
             <p css={folderDescription}>{folder.description}</p>
           </div>
@@ -120,6 +120,7 @@ const ExploreFolderPage = (): JSX.Element => {
           />
         )}
         <div css={fixedFooterStyle}>
+          <div css={footerPadding} />
           <MoreExperiencesButton />
         </div>
       </div>

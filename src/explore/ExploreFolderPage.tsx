@@ -112,7 +112,6 @@ const ExploreFolderPage = (): JSX.Element => {
             <p css={folderDescription}>{folder.description}</p>
           </div>
         )}
-
         {experiences.length > 0 && (
           <MemoizedExperienceList
             experiences={experiences}

@@ -13,8 +13,7 @@ const CURRENT_EXPERIENCE_ENDPOINT = "current";
 const getExperienceEndpoint = (id: string): string =>
   EXPERIENCES_ENDPOINT + `/${id}`;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getCollectionEndpoint = (id: string): string =>
-  FOLDERS_ENDPOINT + `/${id}`;
+const getFolderEndpoint = (id: string): string => FOLDERS_ENDPOINT + `/${id}`;
 
 export const getExperiences = async (): Promise<Experience[]> =>
   get(EXPERIENCES_ENDPOINT);

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { memo, useCallback, useEffect, useState } from "react";
 import PageWidth from "../common/PageWidth";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../common/Header";
 import ExperienceList from "./ExperienceList";
 import { Experience } from "../types/experience";
@@ -70,17 +70,17 @@ const ExploreFolderPage = (): JSX.Element => {
     [experiences, setDialogExperience]
   );
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onExperienceLaunched = useCallback(
     (experience: Experience) => {
       currentExperienceMutation.mutate(experience.id);
       onDialogClosed();
       if (hasControls(experience.id)) {
-        history.push(`/controls/${experience.id}`);
+        navigate(`/controls/${experience.id}`);
       }
     },
-    [experiences, setDialogExperience]
+    [experiences, navigate, setDialogExperience]
   );
 
   const onDialogClosed = () => {

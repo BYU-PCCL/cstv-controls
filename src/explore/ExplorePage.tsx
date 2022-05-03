@@ -6,7 +6,7 @@ import { useCurrentExperience } from "../common/services/hooks/api";
 import PageWidth from "../common/PageWidth";
 import ExploreCollapsingHeader from "./ExploreCollapsingHeader";
 import ExperienceFolder from "./ExperienceFolder";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { superheadingStyle } from "./styles";
 import { Folder } from "../types/folder";
 
@@ -23,13 +23,13 @@ const ExplorePage = (): JSX.Element => {
   const { data: foldersMap } = useFolders();
   const { data: currentExperience } = useCurrentExperience();
   const [folders, setFolders] = useState<Folder[]>([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onFolderClicked = useCallback(
     (folder: Folder) => {
-      history.push(`/explore/${folder.id}`);
+      navigate(`/explore/${folder.id}`);
     },
-    [history, folders]
+    [navigate, folders]
   );
 
   useEffect(() => {

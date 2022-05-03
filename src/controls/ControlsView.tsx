@@ -14,7 +14,7 @@ import controls from "./generated";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import CenteredSpinner from "../common/CenteredSpinner";
 import { ErrorBoundary } from "react-error-boundary";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -38,7 +38,7 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
     useState<boolean>(false);
   const controlsClient = useControlsClient();
   const status = useControlsClientStatus(controlsClient);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!controlsClient || attemptedInitialAppUpdate) {
@@ -82,7 +82,7 @@ const ControlsView = ({ id }: { id: string }): JSX.Element => {
       (controlsClient.getClientAppId() !== id ||
         controlsClient.getConnectionAppId() === id)
     ) {
-      history.push("/");
+      navigate("/");
       return;
     }
 

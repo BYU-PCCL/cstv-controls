@@ -9,12 +9,13 @@ export default {
   component: ControlsPageComponent,
 } as ComponentMeta<typeof ControlsPageComponent>;
 
-export const ControlsPage: ComponentStory<typeof ControlsPageComponent> =
-  () => (
-    <MemoryRouter initialEntries={["/"]}>
-      <ControlsPageComponent />
-    </MemoryRouter>
-  );
+export const ControlsPage: ComponentStory<
+  typeof ControlsPageComponent
+> = () => (
+  <MemoryRouter initialEntries={["/"]}>
+    <ControlsPageComponent />
+  </MemoryRouter>
+);
 
 // Have to do this to consolidate component and story into one
 ControlsPage.storyName = "ControlsPage";

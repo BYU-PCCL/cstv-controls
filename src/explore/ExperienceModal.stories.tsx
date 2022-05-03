@@ -28,18 +28,19 @@ export default {
   component: ExperienceModalComponent,
 } as ComponentMeta<typeof ExperienceModalComponent>;
 
-export const ExperienceModal: ComponentStory<typeof ExperienceModalComponent> =
-  (args) => (
-    <PageWidth>
-      <ExperienceModalComponent
-        experience={TestExperience}
-        onClose={() => {
-          return TestExperience;
-        }}
-        onLaunch={(experience: Experience) => undefined}
-      />
-    </PageWidth>
-  );
+export const ExperienceModal: ComponentStory<
+  typeof ExperienceModalComponent
+> = (args) => (
+  <PageWidth>
+    <ExperienceModalComponent
+      experience={TestExperience}
+      onClose={() => {
+        return TestExperience;
+      }}
+      onLaunch={(experience: Experience) => undefined}
+    />
+  </PageWidth>
+);
 
 // Have to do this to consolidate component and story into one
 ExperienceModal.storyName = "ExperienceModal";

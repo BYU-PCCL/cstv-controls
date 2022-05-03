@@ -32,7 +32,7 @@ const fixedFooterStyle = css`
 
 const ControlsPage = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
-  const experience = useExperience(id);
+  const experience = useExperience(id as string);
   // It feels pretty hacky to ask for both the experience and the current
   // experience, but those two aren't always the same--we could be trying to
   // launch a new experience, for example
@@ -43,7 +43,7 @@ const ControlsPage = (): JSX.Element => {
   return experience ? (
     <PageWidth>
       <ControlsHeader title={experience.title} />
-      <ControlsView id={id} />
+      <ControlsView id={id as string} />
       {(!isCurrentExperience || currentExperience?.lock !== true) && (
         <div css={fixedFooterStyle}>
           <MoreExperiencesButton />

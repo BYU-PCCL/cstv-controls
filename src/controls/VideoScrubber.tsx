@@ -50,18 +50,26 @@ const ControlsComponent = (): JSX.Element => {
   });
 
   const updateSlider = useCallback(
-    async (event, value) => {
-      setProgress(value);
-      await sendMessage({ type: "scrub", progress: value, precise: false });
+    async (event: React.ChangeEvent<unknown>, value: number | number[]) => {
+      setProgress(value as number);
+      await sendMessage({
+        type: "scrub",
+        progress: value as number,
+        precise: false,
+      });
     },
     [sendMessage]
   );
 
   const updateSliderCommitted = useCallback(
-    async (event, value) => {
-      await sendMessage({ type: "scrub", progress: value, precise: true });
+    async (event: React.ChangeEvent<unknown>, value: number | number[]) => {
+      await sendMessage({
+        type: "scrub",
+        progress: value as number,
+        precise: true,
+      });
       setProgress(undefined);
-      setActualProgress(value);
+      setActualProgress(value as number);
     },
     [sendMessage]
   );

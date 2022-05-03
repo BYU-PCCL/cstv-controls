@@ -57,7 +57,7 @@ const ExploreFolderPage = (): JSX.Element => {
   const currentExperienceMutation = useCurrentExperienceMutation();
   const { data: experiencesMap } = useExperiences();
   const [experiences, setExperiences] = useState<Experience[]>([]);
-  const folder = useFolder(id);
+  const folder = useFolder(id as string);
 
   const [dialogExperience, setDialogExperience] = useState<
     Experience | undefined

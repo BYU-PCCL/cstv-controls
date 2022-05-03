@@ -21,8 +21,8 @@ const ControlsComponent = (): JSX.Element => {
   });
 
   const updateSlider = useCallback(
-    async (event, value) => {
-      await sendMessage(value);
+    async (event: React.ChangeEvent<unknown>, value: number | number[]) => {
+      await sendMessage(value as number);
     },
     [sendMessage]
   );

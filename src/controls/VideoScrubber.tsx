@@ -38,7 +38,12 @@ const ControlsComponent = (): JSX.Element => {
   const [duration, setDuration] = useState<number | undefined>();
   const [paused, setPaused] = useState<boolean>(false);
 
-  const { sendMessage } = useMessaging<any>((message) => {
+  const { sendMessage } = useMessaging<{
+    type: string;
+    progress: number;
+    duration: number;
+    state: string;
+  }>((message) => {
     if (message.type === "progress") {
       setActualProgress(message.progress);
       if (message.duration != duration) {

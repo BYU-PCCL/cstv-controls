@@ -89,8 +89,8 @@ const ExperienceFolder = memo(
     return (
       <div css={folderStyle} onClick={() => onClick(folder)}>
         <img css={thumbnailStyle} src={thumbnails.wide} alt="" />
-        <div css={foregroundStyle(colors.primary)} />
-        <p css={textStyle(colors.secondaryLight)}>{title}</p>
+        <div css={foregroundStyle(colors?.primary?.["40"] || "#888")} />
+        <p css={textStyle(colors?.tertiary?.["95"] || "#fafafa")}>{title}</p>
       </div>
     );
   }

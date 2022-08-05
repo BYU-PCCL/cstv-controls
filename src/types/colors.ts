@@ -1,5 +1,5 @@
 export interface Colors {
-  primary: string;
-  secondaryLight: string;
-  secondaryDark: string;
+  primary: Record<string, string>;
+  secondary: Record<string, string>;
+  tertiary: Record<string, string>;
 }

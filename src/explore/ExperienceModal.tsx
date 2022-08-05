@@ -11,15 +11,15 @@ import { Colors } from "../types/colors";
 
 const useCardStyles = makeStyles({
   paper: {
-    backgroundColor: ({ secondaryLight }: Colors) => secondaryLight,
+    backgroundColor: ({ tertiary }: Colors) => tertiary["90"],
     borderRadius: "8px",
   },
 });
 
 const useContentStyles = makeStyles({
   root: {
-    backgroundColor: ({ primary }: Colors) => primary,
-    color: ({ secondaryLight }: Colors) => secondaryLight,
+    backgroundColor: ({ primary }: Colors) => primary["20"],
+    color: ({ primary }: Colors) => primary["90"],
     // TODO: Decide if these are good numbers for padding here
     padding: "20px 24px",
     margin: "-10",
@@ -41,26 +41,26 @@ const useButtonStyles = makeStyles({
     padding: "14px 18px",
   },
   text: {
-    color: ({ secondaryDark }: Colors) => secondaryDark,
+    color: ({ tertiary }: Colors) => tertiary["20"],
     "&:hover": {
-      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark + "30",
+      backgroundColor: ({ tertiary }: Colors) => tertiary["60"],
     },
     "&:active": {
-      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark + "50",
+      backgroundColor: ({ tertiary }: Colors) => tertiary["50"],
     },
   },
   contained: {
     padding: "8px 28px",
-    color: ({ secondaryLight }: Colors) => secondaryLight,
-    backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
+    color: ({ tertiary }: Colors) => tertiary["90"],
+    backgroundColor: ({ tertiary }: Colors) => tertiary["30"],
     borderRadius: "6px",
-    boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary}4d`,
+    boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary["20"]}4d`,
     transition: "transform 100ms",
     "&:hover": {
-      backgroundColor: ({ secondaryDark }: Colors) => secondaryDark,
+      backgroundColor: ({ tertiary }: Colors) => tertiary["20"],
       transform: "scale(102%)",
       "-webkit-transform": "scale(1.02, 1.02);",
-      boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary}4d`,
+      boxShadow: ({ primary }: Colors) => `0px 4px 6px ${primary["20"]}4d`,
     },
     "&:active": {
       transform: "scale(96%)",
@@ -88,9 +88,45 @@ const imageStyle = css`
 `;
 
 const defaultColors: Colors = {
-  primary: "#212121",
-  secondaryLight: "#fafafa",
-  secondaryDark: "#252525",
+  primary: {
+    "0": "#000000",
+    "10": "#000000",
+    "20": "#000000",
+    "30": "#000000",
+    "40": "#000000",
+    "50": "#000000",
+    "60": "#000000",
+    "70": "#000000",
+    "80": "#000000",
+    "90": "#000000",
+    "100": "#000000",
+  },
+  secondary: {
+    "0": "#000000",
+    "10": "#000000",
+    "20": "#000000",
+    "30": "#000000",
+    "40": "#000000",
+    "50": "#000000",
+    "60": "#000000",
+    "70": "#000000",
+    "80": "#000000",
+    "90": "#000000",
+    "100": "#000000",
+  },
+  tertiary: {
+    "0": "#000000",
+    "10": "#000000",
+    "20": "#000000",
+    "30": "#000000",
+    "40": "#000000",
+    "50": "#000000",
+    "60": "#000000",
+    "70": "#000000",
+    "80": "#000000",
+    "90": "#000000",
+    "100": "#000000",
+  },
 };
 
 const ExperienceModal = ({

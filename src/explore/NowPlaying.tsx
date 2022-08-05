@@ -112,8 +112,8 @@ const NowPlaying = ({
             <Link to={`/controls/${experience?.id}`}>
               <div
                 css={imageOverlayContainerStyle(
-                  experience?.colors.primary || "#212121",
-                  experience?.colors.secondaryLight || "#fafafa"
+                  experience?.colors.primary?.["50"] || "#212121",
+                  experience?.colors.primary?.["90"] || "#fafafa"
                 )}
               >
                 <SettingsRemoteIcon fontSize="large" />

@@ -80,9 +80,12 @@ const ExperienceTile = memo(
   }) => {
     const { colors, thumbnails, title } = experience;
     return (
-      <div css={tileStyle(colors.primary)} onClick={() => onClick(experience)}>
+      <div
+        css={tileStyle(colors.primary["40"])}
+        onClick={() => onClick(experience)}
+      >
         <img css={thumbnailStyle} src={thumbnails.thumb} />
-        <p css={textStyle(colors.secondaryLight)}>{title}</p>
+        <p css={textStyle(colors.primary["90"])}>{title}</p>
       </div>
     );
   }
